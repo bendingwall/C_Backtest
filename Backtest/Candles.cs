@@ -37,12 +37,12 @@ namespace Backtest
         public static void ConvertToArray()
         {
             _3d = _candles3d.ToArray();
-            _1d = _candles3d.ToArray();
-            _12h = _candles3d.ToArray();
-            _4h = _candles3d.ToArray();
-            _1h = _candles3d.ToArray();
-            _15m = _candles3d.ToArray();
-            _1m = _candles3d.ToArray();
+            _1d = _candles1d.ToArray();
+            _12h = _candles12h.ToArray();
+            _4h = _candles4h.ToArray();
+            _1h = _candles1h.ToArray();
+            _15m = _candles15m.ToArray();
+            _1m = _candles1m.ToArray();
         }
         public static void AddCandle(OHLC c, int timeframe)
         {

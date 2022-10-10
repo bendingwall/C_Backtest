@@ -52,7 +52,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.TimeSpanPages = new System.Windows.Forms.TabControl();
+            this._1MinButton = new System.Windows.Forms.TabControl();
             this._3Day = new System.Windows.Forms.TabPage();
             this._3DayPlot = new ScottPlot.FormsPlot();
             this._3DayPanel = new System.Windows.Forms.Panel();
@@ -73,14 +73,7 @@
             this._3DayPNL = new System.Windows.Forms.Label();
             this._3DayPNL_Label = new System.Windows.Forms.Label();
             this._1Day = new System.Windows.Forms.TabPage();
-            this._12Hour = new System.Windows.Forms.TabPage();
-            this._4Hour = new System.Windows.Forms.TabPage();
-            this._1Hour = new System.Windows.Forms.TabPage();
-            this._15Min = new System.Windows.Forms.TabPage();
-            this._1Min = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.MenuBacktester = new System.Windows.Forms.TabPage();
-            this.MenuBacktesterSettings = new System.Windows.Forms.TabPage();
+            this._1DayPlot = new ScottPlot.FormsPlot();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -98,6 +91,8 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this._12Hour = new System.Windows.Forms.TabPage();
+            this._12HourPlot = new ScottPlot.FormsPlot();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
@@ -115,6 +110,8 @@
             this.label46 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
+            this._4Hour = new System.Windows.Forms.TabPage();
+            this._4HourPlot = new ScottPlot.FormsPlot();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label49 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
@@ -132,6 +129,8 @@
             this.label62 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
+            this._1Hour = new System.Windows.Forms.TabPage();
+            this._1HourPlot = new ScottPlot.FormsPlot();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label65 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
@@ -149,6 +148,8 @@
             this.label78 = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
+            this._15Min = new System.Windows.Forms.TabPage();
+            this._15MinPlot = new ScottPlot.FormsPlot();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label81 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
@@ -166,6 +167,8 @@
             this.label94 = new System.Windows.Forms.Label();
             this.label95 = new System.Windows.Forms.Label();
             this.label96 = new System.Windows.Forms.Label();
+            this._1Min = new System.Windows.Forms.TabPage();
+            this._1MinPlot = new ScottPlot.FormsPlot();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label97 = new System.Windows.Forms.Label();
             this.label98 = new System.Windows.Forms.Label();
@@ -183,35 +186,32 @@
             this.label110 = new System.Windows.Forms.Label();
             this.label111 = new System.Windows.Forms.Label();
             this.label112 = new System.Windows.Forms.Label();
-            this.formsPlot1 = new ScottPlot.FormsPlot();
-            this.formsPlot2 = new ScottPlot.FormsPlot();
-            this.formsPlot3 = new ScottPlot.FormsPlot();
-            this.formsPlot4 = new ScottPlot.FormsPlot();
-            this.formsPlot5 = new ScottPlot.FormsPlot();
-            this.formsPlot6 = new ScottPlot.FormsPlot();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.MenuBacktester = new System.Windows.Forms.TabPage();
+            this.MenuBacktesterSettings = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.BacktesterBody)).BeginInit();
             this.BacktesterBody.Panel1.SuspendLayout();
             this.BacktesterBody.Panel2.SuspendLayout();
             this.BacktesterBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlaySpeedBar)).BeginInit();
             this.AllPanel.SuspendLayout();
-            this.TimeSpanPages.SuspendLayout();
+            this._1MinButton.SuspendLayout();
             this._3Day.SuspendLayout();
             this._3DayPanel.SuspendLayout();
             this._1Day.SuspendLayout();
+            this.panel1.SuspendLayout();
             this._12Hour.SuspendLayout();
+            this.panel2.SuspendLayout();
             this._4Hour.SuspendLayout();
+            this.panel3.SuspendLayout();
             this._1Hour.SuspendLayout();
+            this.panel4.SuspendLayout();
             this._15Min.SuspendLayout();
+            this.panel5.SuspendLayout();
             this._1Min.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.MenuBacktester.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // BacktesterBody
@@ -235,7 +235,7 @@
             // 
             // BacktesterBody.Panel2
             // 
-            this.BacktesterBody.Panel2.Controls.Add(this.TimeSpanPages);
+            this.BacktesterBody.Panel2.Controls.Add(this._1MinButton);
             this.BacktesterBody.Size = new System.Drawing.Size(1168, 714);
             this.BacktesterBody.SplitterDistance = 77;
             this.BacktesterBody.TabIndex = 0;
@@ -538,29 +538,34 @@
             this.label16.TabIndex = 0;
             this.label16.Text = "PNL:";
             // 
-            // TimeSpanPages
+            // _1MinButton
             // 
-            this.TimeSpanPages.Controls.Add(this._3Day);
-            this.TimeSpanPages.Controls.Add(this._1Day);
-            this.TimeSpanPages.Controls.Add(this._12Hour);
-            this.TimeSpanPages.Controls.Add(this._4Hour);
-            this.TimeSpanPages.Controls.Add(this._1Hour);
-            this.TimeSpanPages.Controls.Add(this._15Min);
-            this.TimeSpanPages.Controls.Add(this._1Min);
-            this.TimeSpanPages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TimeSpanPages.Location = new System.Drawing.Point(0, 0);
-            this.TimeSpanPages.Name = "TimeSpanPages";
-            this.TimeSpanPages.SelectedIndex = 0;
-            this.TimeSpanPages.Size = new System.Drawing.Size(1168, 633);
-            this.TimeSpanPages.TabIndex = 7;
+            this._1MinButton.Controls.Add(this._3Day);
+            this._1MinButton.Controls.Add(this._1Day);
+            this._1MinButton.Controls.Add(this._12Hour);
+            this._1MinButton.Controls.Add(this._4Hour);
+            this._1MinButton.Controls.Add(this._1Hour);
+            this._1MinButton.Controls.Add(this._15Min);
+            this._1MinButton.Controls.Add(this._1Min);
+            this._1MinButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._1MinButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._1MinButton.HotTrack = true;
+            this._1MinButton.Location = new System.Drawing.Point(0, 0);
+            this._1MinButton.Margin = new System.Windows.Forms.Padding(0);
+            this._1MinButton.Name = "_1MinButton";
+            this._1MinButton.SelectedIndex = 0;
+            this._1MinButton.Size = new System.Drawing.Size(1168, 633);
+            this._1MinButton.TabIndex = 7;
             // 
             // _3Day
             // 
+            this._3Day.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this._3Day.Controls.Add(this._3DayPlot);
             this._3Day.Controls.Add(this._3DayPanel);
+            this._3Day.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._3Day.Location = new System.Drawing.Point(4, 29);
+            this._3Day.Margin = new System.Windows.Forms.Padding(0);
             this._3Day.Name = "_3Day";
-            this._3Day.Padding = new System.Windows.Forms.Padding(3);
             this._3Day.Size = new System.Drawing.Size(1160, 600);
             this._3Day.TabIndex = 6;
             this._3Day.Text = "3 Day";
@@ -570,11 +575,12 @@
             // 
             this._3DayPlot.AutoSize = true;
             this._3DayPlot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._3DayPlot.Location = new System.Drawing.Point(3, 47);
+            this._3DayPlot.Location = new System.Drawing.Point(0, 44);
             this._3DayPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this._3DayPlot.Name = "_3DayPlot";
-            this._3DayPlot.Size = new System.Drawing.Size(1154, 550);
+            this._3DayPlot.Size = new System.Drawing.Size(1160, 556);
             this._3DayPlot.TabIndex = 1;
+            this._3DayPlot.Load += new System.EventHandler(this._3DayPlot_Load);
             // 
             // _3DayPanel
             // 
@@ -597,9 +603,9 @@
             this._3DayPanel.Controls.Add(this._3DayPNL_Label);
             this._3DayPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this._3DayPanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this._3DayPanel.Location = new System.Drawing.Point(3, 3);
+            this._3DayPanel.Location = new System.Drawing.Point(0, 0);
             this._3DayPanel.Name = "_3DayPanel";
-            this._3DayPanel.Size = new System.Drawing.Size(1154, 44);
+            this._3DayPanel.Size = new System.Drawing.Size(1160, 44);
             this._3DayPanel.TabIndex = 0;
             // 
             // _3DayAvgDD
@@ -812,7 +818,7 @@
             // 
             // _1Day
             // 
-            this._1Day.Controls.Add(this.formsPlot1);
+            this._1Day.Controls.Add(this._1DayPlot);
             this._1Day.Controls.Add(this.panel1);
             this._1Day.Location = new System.Drawing.Point(4, 29);
             this._1Day.Name = "_1Day";
@@ -822,97 +828,16 @@
             this._1Day.Text = "1 Day";
             this._1Day.UseVisualStyleBackColor = true;
             // 
-            // _12Hour
+            // _1DayPlot
             // 
-            this._12Hour.Controls.Add(this.formsPlot2);
-            this._12Hour.Controls.Add(this.panel2);
-            this._12Hour.Location = new System.Drawing.Point(4, 29);
-            this._12Hour.Name = "_12Hour";
-            this._12Hour.Padding = new System.Windows.Forms.Padding(3);
-            this._12Hour.Size = new System.Drawing.Size(1160, 600);
-            this._12Hour.TabIndex = 4;
-            this._12Hour.Text = "12 Hour";
-            this._12Hour.UseVisualStyleBackColor = true;
-            // 
-            // _4Hour
-            // 
-            this._4Hour.Controls.Add(this.formsPlot3);
-            this._4Hour.Controls.Add(this.panel3);
-            this._4Hour.Location = new System.Drawing.Point(4, 29);
-            this._4Hour.Name = "_4Hour";
-            this._4Hour.Padding = new System.Windows.Forms.Padding(3);
-            this._4Hour.Size = new System.Drawing.Size(1160, 600);
-            this._4Hour.TabIndex = 3;
-            this._4Hour.Text = "4 Hour";
-            this._4Hour.UseVisualStyleBackColor = true;
-            // 
-            // _1Hour
-            // 
-            this._1Hour.Controls.Add(this.formsPlot4);
-            this._1Hour.Controls.Add(this.panel4);
-            this._1Hour.Location = new System.Drawing.Point(4, 29);
-            this._1Hour.Name = "_1Hour";
-            this._1Hour.Padding = new System.Windows.Forms.Padding(3);
-            this._1Hour.Size = new System.Drawing.Size(1160, 600);
-            this._1Hour.TabIndex = 2;
-            this._1Hour.Text = "1 Hour";
-            this._1Hour.UseVisualStyleBackColor = true;
-            // 
-            // _15Min
-            // 
-            this._15Min.Controls.Add(this.formsPlot5);
-            this._15Min.Controls.Add(this.panel5);
-            this._15Min.Location = new System.Drawing.Point(4, 29);
-            this._15Min.Name = "_15Min";
-            this._15Min.Padding = new System.Windows.Forms.Padding(3);
-            this._15Min.Size = new System.Drawing.Size(1160, 600);
-            this._15Min.TabIndex = 1;
-            this._15Min.Text = "15 Minute";
-            this._15Min.UseVisualStyleBackColor = true;
-            // 
-            // _1Min
-            // 
-            this._1Min.Controls.Add(this.formsPlot6);
-            this._1Min.Controls.Add(this.panel6);
-            this._1Min.Location = new System.Drawing.Point(4, 29);
-            this._1Min.Name = "_1Min";
-            this._1Min.Padding = new System.Windows.Forms.Padding(3);
-            this._1Min.Size = new System.Drawing.Size(1160, 600);
-            this._1Min.TabIndex = 7;
-            this._1Min.Text = "1 Minute";
-            this._1Min.UseVisualStyleBackColor = true;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.MenuBacktester);
-            this.tabControl1.Controls.Add(this.MenuBacktesterSettings);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1182, 753);
-            this.tabControl1.TabIndex = 1;
-            // 
-            // MenuBacktester
-            // 
-            this.MenuBacktester.Controls.Add(this.BacktesterBody);
-            this.MenuBacktester.Location = new System.Drawing.Point(4, 29);
-            this.MenuBacktester.Name = "MenuBacktester";
-            this.MenuBacktester.Padding = new System.Windows.Forms.Padding(3);
-            this.MenuBacktester.Size = new System.Drawing.Size(1174, 720);
-            this.MenuBacktester.TabIndex = 1;
-            this.MenuBacktester.Text = "Backtester";
-            this.MenuBacktester.UseVisualStyleBackColor = true;
-            // 
-            // MenuBacktesterSettings
-            // 
-            this.MenuBacktesterSettings.Location = new System.Drawing.Point(4, 29);
-            this.MenuBacktesterSettings.Name = "MenuBacktesterSettings";
-            this.MenuBacktesterSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.MenuBacktesterSettings.Size = new System.Drawing.Size(1174, 720);
-            this.MenuBacktesterSettings.TabIndex = 0;
-            this.MenuBacktesterSettings.Text = "Backtester Settings";
-            this.MenuBacktesterSettings.UseVisualStyleBackColor = true;
+            this._1DayPlot.AutoSize = true;
+            this._1DayPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._1DayPlot.Location = new System.Drawing.Point(3, 47);
+            this._1DayPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this._1DayPlot.Name = "_1DayPlot";
+            this._1DayPlot.Size = new System.Drawing.Size(1154, 550);
+            this._1DayPlot.TabIndex = 2;
+            this._1DayPlot.Load += new System.EventHandler(this._1DayPlot_Load);
             // 
             // panel1
             // 
@@ -1148,6 +1073,29 @@
             this.label32.TabIndex = 0;
             this.label32.Text = "PNL:";
             // 
+            // _12Hour
+            // 
+            this._12Hour.Controls.Add(this._12HourPlot);
+            this._12Hour.Controls.Add(this.panel2);
+            this._12Hour.Location = new System.Drawing.Point(4, 29);
+            this._12Hour.Name = "_12Hour";
+            this._12Hour.Padding = new System.Windows.Forms.Padding(3);
+            this._12Hour.Size = new System.Drawing.Size(1160, 600);
+            this._12Hour.TabIndex = 4;
+            this._12Hour.Text = "12 Hour";
+            this._12Hour.UseVisualStyleBackColor = true;
+            // 
+            // _12HourPlot
+            // 
+            this._12HourPlot.AutoSize = true;
+            this._12HourPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._12HourPlot.Location = new System.Drawing.Point(3, 47);
+            this._12HourPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this._12HourPlot.Name = "_12HourPlot";
+            this._12HourPlot.Size = new System.Drawing.Size(1154, 550);
+            this._12HourPlot.TabIndex = 2;
+            this._12HourPlot.Load += new System.EventHandler(this._12HourPlot_Load);
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
@@ -1381,6 +1329,29 @@
             this.label48.Size = new System.Drawing.Size(38, 40);
             this.label48.TabIndex = 0;
             this.label48.Text = "PNL:";
+            // 
+            // _4Hour
+            // 
+            this._4Hour.Controls.Add(this._4HourPlot);
+            this._4Hour.Controls.Add(this.panel3);
+            this._4Hour.Location = new System.Drawing.Point(4, 29);
+            this._4Hour.Name = "_4Hour";
+            this._4Hour.Padding = new System.Windows.Forms.Padding(3);
+            this._4Hour.Size = new System.Drawing.Size(1160, 600);
+            this._4Hour.TabIndex = 3;
+            this._4Hour.Text = "4 Hour";
+            this._4Hour.UseVisualStyleBackColor = true;
+            // 
+            // _4HourPlot
+            // 
+            this._4HourPlot.AutoSize = true;
+            this._4HourPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._4HourPlot.Location = new System.Drawing.Point(3, 47);
+            this._4HourPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this._4HourPlot.Name = "_4HourPlot";
+            this._4HourPlot.Size = new System.Drawing.Size(1154, 550);
+            this._4HourPlot.TabIndex = 2;
+            this._4HourPlot.Load += new System.EventHandler(this._4HourPlot_Load);
             // 
             // panel3
             // 
@@ -1616,6 +1587,29 @@
             this.label64.TabIndex = 0;
             this.label64.Text = "PNL:";
             // 
+            // _1Hour
+            // 
+            this._1Hour.Controls.Add(this._1HourPlot);
+            this._1Hour.Controls.Add(this.panel4);
+            this._1Hour.Location = new System.Drawing.Point(4, 29);
+            this._1Hour.Name = "_1Hour";
+            this._1Hour.Padding = new System.Windows.Forms.Padding(3);
+            this._1Hour.Size = new System.Drawing.Size(1160, 600);
+            this._1Hour.TabIndex = 2;
+            this._1Hour.Text = "1 Hour";
+            this._1Hour.UseVisualStyleBackColor = true;
+            // 
+            // _1HourPlot
+            // 
+            this._1HourPlot.AutoSize = true;
+            this._1HourPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._1HourPlot.Location = new System.Drawing.Point(3, 47);
+            this._1HourPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this._1HourPlot.Name = "_1HourPlot";
+            this._1HourPlot.Size = new System.Drawing.Size(1154, 550);
+            this._1HourPlot.TabIndex = 2;
+            this._1HourPlot.Load += new System.EventHandler(this._1HourPlot_Load);
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
@@ -1849,6 +1843,29 @@
             this.label80.Size = new System.Drawing.Size(38, 40);
             this.label80.TabIndex = 0;
             this.label80.Text = "PNL:";
+            // 
+            // _15Min
+            // 
+            this._15Min.Controls.Add(this._15MinPlot);
+            this._15Min.Controls.Add(this.panel5);
+            this._15Min.Location = new System.Drawing.Point(4, 29);
+            this._15Min.Name = "_15Min";
+            this._15Min.Padding = new System.Windows.Forms.Padding(3);
+            this._15Min.Size = new System.Drawing.Size(1160, 600);
+            this._15Min.TabIndex = 1;
+            this._15Min.Text = "15 Minute";
+            this._15Min.UseVisualStyleBackColor = true;
+            // 
+            // _15MinPlot
+            // 
+            this._15MinPlot.AutoSize = true;
+            this._15MinPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._15MinPlot.Location = new System.Drawing.Point(3, 47);
+            this._15MinPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this._15MinPlot.Name = "_15MinPlot";
+            this._15MinPlot.Size = new System.Drawing.Size(1154, 550);
+            this._15MinPlot.TabIndex = 2;
+            this._15MinPlot.Load += new System.EventHandler(this._15MinPlot_Load);
             // 
             // panel5
             // 
@@ -2084,6 +2101,29 @@
             this.label96.TabIndex = 0;
             this.label96.Text = "PNL:";
             // 
+            // _1Min
+            // 
+            this._1Min.Controls.Add(this._1MinPlot);
+            this._1Min.Controls.Add(this.panel6);
+            this._1Min.Location = new System.Drawing.Point(4, 29);
+            this._1Min.Name = "_1Min";
+            this._1Min.Padding = new System.Windows.Forms.Padding(3);
+            this._1Min.Size = new System.Drawing.Size(1160, 600);
+            this._1Min.TabIndex = 7;
+            this._1Min.Text = "1 Minute";
+            this._1Min.UseVisualStyleBackColor = true;
+            // 
+            // _1MinPlot
+            // 
+            this._1MinPlot.AutoSize = true;
+            this._1MinPlot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._1MinPlot.Location = new System.Drawing.Point(3, 47);
+            this._1MinPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this._1MinPlot.Name = "_1MinPlot";
+            this._1MinPlot.Size = new System.Drawing.Size(1154, 550);
+            this._1MinPlot.TabIndex = 2;
+            this._1MinPlot.Load += new System.EventHandler(this._1MinPlot_Load);
+            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Gainsboro;
@@ -2318,65 +2358,37 @@
             this.label112.TabIndex = 0;
             this.label112.Text = "PNL:";
             // 
-            // formsPlot1
+            // tabControl1
             // 
-            this.formsPlot1.AutoSize = true;
-            this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot1.Location = new System.Drawing.Point(3, 47);
-            this.formsPlot1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(1154, 550);
-            this.formsPlot1.TabIndex = 2;
+            this.tabControl1.Controls.Add(this.MenuBacktester);
+            this.tabControl1.Controls.Add(this.MenuBacktesterSettings);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1182, 753);
+            this.tabControl1.TabIndex = 1;
             // 
-            // formsPlot2
+            // MenuBacktester
             // 
-            this.formsPlot2.AutoSize = true;
-            this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot2.Location = new System.Drawing.Point(3, 47);
-            this.formsPlot2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(1154, 550);
-            this.formsPlot2.TabIndex = 2;
+            this.MenuBacktester.Controls.Add(this.BacktesterBody);
+            this.MenuBacktester.Location = new System.Drawing.Point(4, 29);
+            this.MenuBacktester.Name = "MenuBacktester";
+            this.MenuBacktester.Padding = new System.Windows.Forms.Padding(3);
+            this.MenuBacktester.Size = new System.Drawing.Size(1174, 720);
+            this.MenuBacktester.TabIndex = 1;
+            this.MenuBacktester.Text = "Backtester";
+            this.MenuBacktester.UseVisualStyleBackColor = true;
             // 
-            // formsPlot3
+            // MenuBacktesterSettings
             // 
-            this.formsPlot3.AutoSize = true;
-            this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot3.Location = new System.Drawing.Point(3, 47);
-            this.formsPlot3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.formsPlot3.Name = "formsPlot3";
-            this.formsPlot3.Size = new System.Drawing.Size(1154, 550);
-            this.formsPlot3.TabIndex = 2;
-            // 
-            // formsPlot4
-            // 
-            this.formsPlot4.AutoSize = true;
-            this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot4.Location = new System.Drawing.Point(3, 47);
-            this.formsPlot4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.formsPlot4.Name = "formsPlot4";
-            this.formsPlot4.Size = new System.Drawing.Size(1154, 550);
-            this.formsPlot4.TabIndex = 2;
-            // 
-            // formsPlot5
-            // 
-            this.formsPlot5.AutoSize = true;
-            this.formsPlot5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot5.Location = new System.Drawing.Point(3, 47);
-            this.formsPlot5.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.formsPlot5.Name = "formsPlot5";
-            this.formsPlot5.Size = new System.Drawing.Size(1154, 550);
-            this.formsPlot5.TabIndex = 2;
-            // 
-            // formsPlot6
-            // 
-            this.formsPlot6.AutoSize = true;
-            this.formsPlot6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot6.Location = new System.Drawing.Point(3, 47);
-            this.formsPlot6.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.formsPlot6.Name = "formsPlot6";
-            this.formsPlot6.Size = new System.Drawing.Size(1154, 550);
-            this.formsPlot6.TabIndex = 2;
+            this.MenuBacktesterSettings.Location = new System.Drawing.Point(4, 29);
+            this.MenuBacktesterSettings.Name = "MenuBacktesterSettings";
+            this.MenuBacktesterSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.MenuBacktesterSettings.Size = new System.Drawing.Size(1174, 720);
+            this.MenuBacktesterSettings.TabIndex = 0;
+            this.MenuBacktesterSettings.Text = "Backtester Settings";
+            this.MenuBacktesterSettings.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -2396,37 +2408,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.PlaySpeedBar)).EndInit();
             this.AllPanel.ResumeLayout(false);
             this.AllPanel.PerformLayout();
-            this.TimeSpanPages.ResumeLayout(false);
+            this._1MinButton.ResumeLayout(false);
             this._3Day.ResumeLayout(false);
             this._3Day.PerformLayout();
             this._3DayPanel.ResumeLayout(false);
             this._3DayPanel.PerformLayout();
             this._1Day.ResumeLayout(false);
             this._1Day.PerformLayout();
-            this._12Hour.ResumeLayout(false);
-            this._12Hour.PerformLayout();
-            this._4Hour.ResumeLayout(false);
-            this._4Hour.PerformLayout();
-            this._1Hour.ResumeLayout(false);
-            this._1Hour.PerformLayout();
-            this._15Min.ResumeLayout(false);
-            this._15Min.PerformLayout();
-            this._1Min.ResumeLayout(false);
-            this._1Min.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.MenuBacktester.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this._12Hour.ResumeLayout(false);
+            this._12Hour.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this._4Hour.ResumeLayout(false);
+            this._4Hour.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this._1Hour.ResumeLayout(false);
+            this._1Hour.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this._15Min.ResumeLayout(false);
+            this._15Min.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this._1Min.ResumeLayout(false);
+            this._1Min.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.MenuBacktester.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2434,7 +2446,7 @@
         #endregion
 
         private SplitContainer BacktesterBody;
-        private TabControl TimeSpanPages;
+        private TabControl _1MinButton;
         private TabPage _15Min;
         private TabPage _3Day;
         private TabPage _1Day;
@@ -2486,7 +2498,7 @@
         private TrackBar PlaySpeedBar;
         private Splitter splitter2;
         private Splitter splitter1;
-        private ScottPlot.FormsPlot formsPlot1;
+        private ScottPlot.FormsPlot _1DayPlot;
         private Panel panel1;
         private Label label17;
         private Label label18;
@@ -2504,7 +2516,7 @@
         private Label label30;
         private Label label31;
         private Label label32;
-        private ScottPlot.FormsPlot formsPlot2;
+        private ScottPlot.FormsPlot _12HourPlot;
         private Panel panel2;
         private Label label33;
         private Label label34;
@@ -2522,7 +2534,7 @@
         private Label label46;
         private Label label47;
         private Label label48;
-        private ScottPlot.FormsPlot formsPlot3;
+        private ScottPlot.FormsPlot _4HourPlot;
         private Panel panel3;
         private Label label49;
         private Label label50;
@@ -2540,7 +2552,7 @@
         private Label label62;
         private Label label63;
         private Label label64;
-        private ScottPlot.FormsPlot formsPlot4;
+        private ScottPlot.FormsPlot _1HourPlot;
         private Panel panel4;
         private Label label65;
         private Label label66;
@@ -2558,7 +2570,7 @@
         private Label label78;
         private Label label79;
         private Label label80;
-        private ScottPlot.FormsPlot formsPlot5;
+        private ScottPlot.FormsPlot _15MinPlot;
         private Panel panel5;
         private Label label81;
         private Label label82;
@@ -2576,7 +2588,7 @@
         private Label label94;
         private Label label95;
         private Label label96;
-        private ScottPlot.FormsPlot formsPlot6;
+        private ScottPlot.FormsPlot _1MinPlot;
         private Panel panel6;
         private Label label97;
         private Label label98;
