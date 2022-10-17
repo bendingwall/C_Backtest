@@ -24,9 +24,25 @@ namespace Backtest
         int _1DayPosition = 0;
         int _3DayPosition = 0;
 
+        int _1MinInitNum = 0;
+        int _15MinInitNum = 0;
+        int _1HourInitNum = 0;
+        int _4HourInitNum = 0;
+        int _12HourInitNum = 0;
+        int _1DayInitNum = 0;
+        int _3DayInitNum = 0;
+
         public Form1()
         {
             InitializeComponent();
+
+            _1MinInitNum = TrenchSettings.TotalWidth - 1;
+            _15MinInitNum = TrenchSettings.TotalWidth - 1;
+            _1HourInitNum = TrenchSettings.TotalWidth - 1;
+            _4HourInitNum = TrenchSettings.TotalWidth - 1;
+            _12HourInitNum = TrenchSettings.TotalWidth - 1;
+            _1DayInitNum = TrenchSettings.TotalWidth - 1;
+            _3DayInitNum = TrenchSettings.TotalWidth - 1;
 
             _1MinTimer.Interval = Interactables.Speed;
             _1MinTimer.Start();
@@ -44,75 +60,120 @@ namespace Backtest
             _3DayTimer.Start();
         }
 
-        private void StepByStepCharts(object sender, EventArgs e, OHLC[] candles, int _Position, int timeframe, FormsPlot _Plot)
+        private void StepByStepCharts(object sender, EventArgs e, OHLC[] candles, int _Position, int timeframe, FormsPlot _Plot, int InitNum)
         {
             if (Interactables.Play)
             {
                 List<OHLC> PartitionChart = new List<OHLC>();
-                for (int i = 0; i < TrenchSettings.TotalWidth; i++)
+
+                if (InitNum > 0)
                 {
-                    if (_Position + i >= candles.Length)
+                    for (int i = 0; i < TrenchSettings.TotalWidth - InitNum; i++)
                     {
-                        timer.Stop();
+                        if (i >= candles.Length)
+                        {
+                            timer.Stop();
+                        }
+                        else
+                        {
+                            PartitionChart.Add(candles[i]);
+                        }
                     }
-                    else
+                    switch (timeframe)
                     {
-                        PartitionChart.Add(candles[_Position + i]);
+                        case 1:
+                            _1MinInitNum--;
+                            break;
+                        case 15:
+                            _15MinInitNum--;
+                            break;
+                        case 60:
+                            _1HourInitNum--;
+                            break;
+                        case 4:
+                            _4HourInitNum--;
+                            break;
+                        case 12:
+                            _12HourInitNum--;
+                            break;
+                        case 24:
+                            _1DayInitNum--;
+                            break;
+                        case 3:
+                            _3DayInitNum--;
+                            break;
+                        default:
+                            break;
                     }
                 }
+                else
+                {
+                    for (int i = 0; i < TrenchSettings.TotalWidth; i++)
+                    {
+                        if (_Position + i >= candles.Length)
+                        {
+                            timer.Stop();
+                        }
+                        else
+                        {
+                            PartitionChart.Add(candles[_Position + i]);
+                        }
+                    }
+
+                    switch (timeframe)
+                    {
+                        case 1:
+                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            {
+                                _1MinPosition++;
+                            }
+                            break;
+                        case 15:
+                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            {
+                                _15MinPosition++;
+                            }
+                            break;
+                        case 60:
+                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            {
+                                _1HourPosition++;
+                            }
+                            break;
+                        case 4:
+                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            {
+                                _4HourPosition++;
+                            }
+                            break;
+                        case 12:
+                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            {
+                                _12HourPosition++;
+                            }
+                            break;
+                        case 24:
+                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            {
+                                _1DayPosition++;
+                            }
+                            break;
+                        case 3:
+                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            {
+                                _3DayPosition++;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
                 _Plot.Plot.Clear();
                 _Plot.Plot.AddCandlesticks(PartitionChart.ToArray());
                 _Plot.Plot.XAxis.DateTimeFormat(true);
                 _Plot.Plot.AxisAuto();
                 _Plot.Refresh();
-
-                switch (timeframe)
-                {
-                    case 1:
-                        if (_Position + TrenchSettings.TotalWidth <= candles.Length)
-                        {
-                            _1MinPosition++;
-                        }
-                        break;
-                    case 15:
-                        if (_Position + TrenchSettings.TotalWidth <= candles.Length)
-                        {
-                            _15MinPosition++;
-                        }
-                        break;
-                    case 60:
-                        if (_Position + TrenchSettings.TotalWidth <= candles.Length)
-                        {
-                            _1HourPosition++;
-                        }
-                        break;
-                    case 4:
-                        if (_Position + TrenchSettings.TotalWidth <= candles.Length)
-                        {
-                            _4HourPosition++;
-                        }
-                        break;
-                    case 12:
-                        if (_Position + TrenchSettings.TotalWidth <= candles.Length)
-                        {
-                            _12HourPosition++;
-                        }
-                        break;
-                    case 24:
-                        if (_Position + TrenchSettings.TotalWidth <= candles.Length)
-                        {
-                            _1DayPosition++;
-                        }
-                        break;
-                    case 3:
-                        if (_Position + TrenchSettings.TotalWidth <= candles.Length)
-                        {
-                            _3DayPosition++;
-                        }
-                        break;
-                    default:
-                        break;
-                }
             }
         }
 
@@ -129,37 +190,37 @@ namespace Backtest
 
         private void _3DayPlot_Load(object sender, EventArgs e)
         {
-            _3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, _3DayPlot));
+            _3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, _3DayPlot, _3DayInitNum));
         }
 
         private void _1DayPlot_Load(object sender, EventArgs e)
         {
-            _1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, _1DayPlot));
+            _1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, _1DayPlot, _1DayInitNum));
         }
 
         private void _12HourPlot_Load(object sender, EventArgs e)
         {
-            _12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, _12HourPlot));
+            _12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, _12HourPlot, _12HourInitNum));
         }
 
         private void _4HourPlot_Load(object sender, EventArgs e)
         {
-            _4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, _4HourPlot));
+            _4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, _4HourPlot, _4HourInitNum));
         }
 
         private void _1HourPlot_Load(object sender, EventArgs e)
         {
-            _1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, _1HourPlot));
+            _1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, _1HourPlot, _1HourInitNum));
         }
 
         private void _15MinPlot_Load(object sender, EventArgs e)
         {
-            _15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, _15MinPlot));
+            _15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, _15MinPlot, _15MinInitNum));
         }
 
         private void _1MinPlot_Load(object sender, EventArgs e)
         {
-            _1MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1m, _1MinPosition, 1, _1MinPlot));
+            _1MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1m, _1MinPosition, 1, _1MinPlot, _1MinInitNum));
         }
 
 

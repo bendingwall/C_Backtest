@@ -17,6 +17,5 @@ namespace Backtest
         private static bool trenchPumpClosedAboveDump;
 
         public static int TotalWidth { get { return totalWidth; } set { totalWidth = value; } }
-
     }
 }
