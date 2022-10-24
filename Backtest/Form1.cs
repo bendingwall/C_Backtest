@@ -14,51 +14,28 @@ namespace Backtest
         System.Windows.Forms.Timer _1DayTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _3DayTimer = new System.Windows.Forms.Timer();
 
-        int _1MinPosition = 0;
-        int _15MinPosition = 0;
-        int _1HourPosition = 0;
-        int _4HourPosition = 0;
-        int _12HourPosition = 0;
-        int _1DayPosition = 0;
-        int _3DayPosition = 0;
-
-        int _1MinInitNum = 0;
-        int _15MinInitNum = 0;
-        int _1HourInitNum = 0;
-        int _4HourInitNum = 0;
-        int _12HourInitNum = 0;
-        int _1DayInitNum = 0;
-        int _3DayInitNum = 0;
+        int _1MinPosition = 0, _1MinInitNum = 0;
+        int _15MinPosition = 0, _15MinInitNum = 0;
+        int _1HourPosition = 0, _1HourInitNum = 0;
+        int _4HourPosition = 0, _4HourInitNum = 0;
+        int _12HourPosition = 0, _12HourInitNum = 0;
+        int _1DayPosition = 0, _1DayInitNum = 0;
+        int _3DayPosition = 0, _3DayInitNum = 0;
 
         public Form1()
         {            
             InitializeComponent();
 
-            _1MinInitNum = TrenchSettings.TotalWidth - 1;
-            _15MinInitNum = TrenchSettings.TotalWidth - 1;
-            _1HourInitNum = TrenchSettings.TotalWidth - 1;
-            _4HourInitNum = TrenchSettings.TotalWidth - 1;
-            _12HourInitNum = TrenchSettings.TotalWidth - 1;
-            _1DayInitNum = TrenchSettings.TotalWidth - 1;
-            _3DayInitNum = TrenchSettings.TotalWidth - 1;
-
-            _1MinTimer.Interval = Interactables.Speed;
-            _1MinTimer.Start();
-            _15MinTimer.Interval = Interactables.Speed;
-            _15MinTimer.Start();
-            _1HourTimer.Interval = Interactables.Speed;
-            _1HourTimer.Start();
-            _4HourTimer.Interval = Interactables.Speed;
-            _4HourTimer.Start();
-            _12HourTimer.Interval = Interactables.Speed;
-            _12HourTimer.Start();
-            _1DayTimer.Interval = Interactables.Speed;
-            _1DayTimer.Start();
-            _3DayTimer.Interval = Interactables.Speed;
-            _3DayTimer.Start();
+            _1MinInitNum = TrenchSettings.Min1.TotalWidth - 1;
+            _15MinInitNum = TrenchSettings.Min15.TotalWidth - 1;
+            _1HourInitNum = TrenchSettings.Hour1.TotalWidth - 1;
+            _4HourInitNum = TrenchSettings.Hour4.TotalWidth - 1;
+            _12HourInitNum = TrenchSettings.Hour12.TotalWidth - 1;
+            _1DayInitNum = TrenchSettings.Day1.TotalWidth - 1;
+            _3DayInitNum = TrenchSettings.Day3.TotalWidth - 1;
         }
 
-        private void StepByStepCharts(object sender, EventArgs e, OHLC[] candles, int _Position, int timeframe, FormsPlot _Plot, int InitNum, System.Windows.Forms.Timer time)
+        private void StepByStepCharts(object sender, EventArgs e, OHLC[] candles, int _Position, int timeframe, TrenchSetting trench, FormsPlot _Plot, int InitNum, System.Windows.Forms.Timer time)
         {
             if (Interactables.Play)
             {
@@ -66,7 +43,7 @@ namespace Backtest
 
                 if (InitNum > 0)
                 {
-                    for (int i = 0; i < TrenchSettings.TotalWidth - InitNum; i++)
+                    for (int i = 0; i < trench.TotalWidth - InitNum; i++)
                     {
                         if (i >= candles.Length)
                         {
@@ -106,7 +83,7 @@ namespace Backtest
                 }
                 else
                 {
-                    for (int i = 0; i < TrenchSettings.TotalWidth; i++)
+                    for (int i = 0; i < trench.TotalWidth; i++)
                     {
                         if (_Position + i >= candles.Length)
                         {
@@ -121,43 +98,43 @@ namespace Backtest
                     switch (timeframe)
                     {
                         case 1:
-                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            if (_Position + TrenchSettings.Min1.TotalWidth <= candles.Length)
                             {
                                 _1MinPosition++;
                             }
                             break;
                         case 15:
-                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            if (_Position + TrenchSettings.Min15.TotalWidth <= candles.Length)
                             {
                                 _15MinPosition++;
                             }
                             break;
                         case 60:
-                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            if (_Position + TrenchSettings.Hour1.TotalWidth <= candles.Length)
                             {
                                 _1HourPosition++;
                             }
                             break;
                         case 4:
-                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            if (_Position + TrenchSettings.Hour4.TotalWidth <= candles.Length)
                             {
                                 _4HourPosition++;
                             }
                             break;
                         case 12:
-                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            if (_Position + TrenchSettings.Hour12.TotalWidth <= candles.Length)
                             {
                                 _12HourPosition++;
                             }
                             break;
                         case 24:
-                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            if (_Position + TrenchSettings.Day1.TotalWidth <= candles.Length)
                             {
                                 _1DayPosition++;
                             }
                             break;
                         case 3:
-                            if (_Position + TrenchSettings.TotalWidth <= candles.Length)
+                            if (_Position + TrenchSettings.Day3.TotalWidth <= candles.Length)
                             {
                                 _3DayPosition++;
                             }
@@ -169,6 +146,7 @@ namespace Backtest
 
                 _Plot.Plot.Clear();
                 _Plot.Plot.AddCandlesticks(PartitionChart.ToArray());
+                Trade t = Trench.ScanForTrench(PartitionChart, 1);
                 _Plot.Plot.XAxis.DateTimeFormat(true);
                 _Plot.Plot.AxisAuto();
                 _Plot.Refresh();
@@ -188,37 +166,37 @@ namespace Backtest
 
         private void _3DayPlot_Load(object sender, EventArgs e)
         {
-            _3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, _3DayPlot, _3DayInitNum, _3DayTimer));
+            _3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, TrenchSettings.Hour1, _3DayPlot, _3DayInitNum, _3DayTimer));
         }
 
         private void _1DayPlot_Load(object sender, EventArgs e)
         {
-            _1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, _1DayPlot, _1DayInitNum, _1DayTimer));
+            _1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, TrenchSettings.Day1, _1DayPlot, _1DayInitNum, _1DayTimer));
         }
 
         private void _12HourPlot_Load(object sender, EventArgs e)
         {
-            _12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, _12HourPlot, _12HourInitNum, _12HourTimer));
+            _12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, TrenchSettings.Hour12, _12HourPlot, _12HourInitNum, _12HourTimer));
         }
 
         private void _4HourPlot_Load(object sender, EventArgs e)
         {
-            _4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, _4HourPlot, _4HourInitNum, _4HourTimer));
+            _4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, TrenchSettings.Hour4, _4HourPlot, _4HourInitNum, _4HourTimer));
         }
 
         private void _1HourPlot_Load(object sender, EventArgs e)
         {
-            _1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, _1HourPlot, _1HourInitNum, _1HourTimer));
+            _1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, TrenchSettings.Hour1, _1HourPlot, _1HourInitNum, _1HourTimer));
         }
 
         private void _15MinPlot_Load(object sender, EventArgs e)
         {
-            _15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, _15MinPlot, _15MinInitNum, _15MinTimer));
+            _15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, TrenchSettings.Min15, _15MinPlot, _15MinInitNum, _15MinTimer));
         }
 
         private void _1MinPlot_Load(object sender, EventArgs e)
         {
-            _1MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1m, _1MinPosition, 1, _1MinPlot, _1MinInitNum, _1MinTimer));
+            _1MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1m, _1MinPosition, 1, TrenchSettings.Min1, _1MinPlot, _1MinInitNum, _1MinTimer));
         }
 
 
@@ -227,6 +205,8 @@ namespace Backtest
             Interactables.Play = true;
             Interactables.Pause = false;
             Interactables.Refresh = false;
+
+            SetTimerSpeeds();
 
             _1MinTimer.Start();
             _15MinTimer.Start();
