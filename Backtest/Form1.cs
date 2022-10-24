@@ -14,8 +14,6 @@ namespace Backtest
         System.Windows.Forms.Timer _1DayTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _3DayTimer = new System.Windows.Forms.Timer();
 
-        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-
         int _1MinPosition = 0;
         int _15MinPosition = 0;
         int _1HourPosition = 0;
@@ -33,7 +31,7 @@ namespace Backtest
         int _3DayInitNum = 0;
 
         public Form1()
-        {
+        {            
             InitializeComponent();
 
             _1MinInitNum = TrenchSettings.TotalWidth - 1;
@@ -60,7 +58,7 @@ namespace Backtest
             _3DayTimer.Start();
         }
 
-        private void StepByStepCharts(object sender, EventArgs e, OHLC[] candles, int _Position, int timeframe, FormsPlot _Plot, int InitNum)
+        private void StepByStepCharts(object sender, EventArgs e, OHLC[] candles, int _Position, int timeframe, FormsPlot _Plot, int InitNum, System.Windows.Forms.Timer time)
         {
             if (Interactables.Play)
             {
@@ -72,7 +70,7 @@ namespace Backtest
                     {
                         if (i >= candles.Length)
                         {
-                            timer.Stop();
+                            time.Stop();
                         }
                         else
                         {
@@ -112,7 +110,7 @@ namespace Backtest
                     {
                         if (_Position + i >= candles.Length)
                         {
-                            timer.Stop();
+                            time.Stop();
                         }
                         else
                         {
@@ -190,43 +188,38 @@ namespace Backtest
 
         private void _3DayPlot_Load(object sender, EventArgs e)
         {
-            _3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, _3DayPlot, _3DayInitNum));
+            _3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, _3DayPlot, _3DayInitNum, _3DayTimer));
         }
 
         private void _1DayPlot_Load(object sender, EventArgs e)
         {
-            _1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, _1DayPlot, _1DayInitNum));
+            _1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, _1DayPlot, _1DayInitNum, _1DayTimer));
         }
 
         private void _12HourPlot_Load(object sender, EventArgs e)
         {
-            _12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, _12HourPlot, _12HourInitNum));
+            _12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, _12HourPlot, _12HourInitNum, _12HourTimer));
         }
 
         private void _4HourPlot_Load(object sender, EventArgs e)
         {
-            _4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, _4HourPlot, _4HourInitNum));
+            _4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, _4HourPlot, _4HourInitNum, _4HourTimer));
         }
 
         private void _1HourPlot_Load(object sender, EventArgs e)
         {
-            _1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, _1HourPlot, _1HourInitNum));
+            _1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, _1HourPlot, _1HourInitNum, _1HourTimer));
         }
 
         private void _15MinPlot_Load(object sender, EventArgs e)
         {
-            _15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, _15MinPlot, _15MinInitNum));
+            _15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, _15MinPlot, _15MinInitNum, _15MinTimer));
         }
 
         private void _1MinPlot_Load(object sender, EventArgs e)
         {
-            _1MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1m, _1MinPosition, 1, _1MinPlot, _1MinInitNum));
+            _1MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1m, _1MinPosition, 1, _1MinPlot, _1MinInitNum, _1MinTimer));
         }
-
-
-
-
-
 
 
         private void PlayButton_Click(object sender, EventArgs e)
@@ -234,6 +227,14 @@ namespace Backtest
             Interactables.Play = true;
             Interactables.Pause = false;
             Interactables.Refresh = false;
+
+            _1MinTimer.Start();
+            _15MinTimer.Start();
+            _1HourTimer.Start();
+            _4HourTimer.Start();
+            _12HourTimer.Start();
+            _1DayTimer.Start();
+            _3DayTimer.Start();
         }
 
         private void PauseButton_Click(object sender, EventArgs e)
@@ -241,6 +242,14 @@ namespace Backtest
             Interactables.Play = false;
             Interactables.Pause = true;
             Interactables.Refresh = false;
+
+            _1MinTimer.Stop();
+            _15MinTimer.Stop();
+            _1HourTimer.Stop();
+            _4HourTimer.Stop();
+            _12HourTimer.Stop();
+            _1DayTimer.Stop();
+            _3DayTimer.Stop();
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)

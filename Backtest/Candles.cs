@@ -83,7 +83,7 @@ namespace Backtest
 
             foreach (var file in files)
             {
-                using (var reader = new StreamReader(@"C:\Users\ADMIN\source\repos\Backtest\Backtest\Data\BTCUSDT\" + file))
+                using (var reader = new StreamReader(Path.Combine(@"C:\Users\ADMIN\source\repos\Backtest\Backtest\Data\BTCUSDT\", file)))
                 {
                     while (!reader.EndOfStream)
                     {
