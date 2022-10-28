@@ -28,9 +28,8 @@ namespace Backtest
     internal class TrenchSetting
     {
         private int totalWidth = 100;
-        private int flatWidth;
         private int dumpWidth = 15;
-        private int pumpWidth;
+        private int pumpWidth = 30;
         private float trenchDumpValue;
         private float trenchPumpValue;
         private bool trenchPumpClosedAboveDump;
@@ -52,40 +51,155 @@ namespace Backtest
             bool pumpValueAccepted = false;
 
             List<OHLC> dump = new List<OHLC>();
-            List<OHLC> trench = new List<OHLC>();
             List<OHLC> pump = new List<OHLC>();
 
             for (int i = 0; i < candles.Count; i++) //head is always going to be i
             {
-                double highestOpen = 0, highestHigh = 0, lowestLow = 0, lowestClose = 0;
+                dump = new List<OHLC>();
+                pump = new List<OHLC>();
+                double trenchTail = 0;
+                double trenchHead = 0;
+                double trenchBottom = 0;
+
+                double dumpHighestOpen = 0, dumpHighestHigh = 0, dumpLowestLow = 0, dumpLowestClose = 0;
+                int dumpHighestOpenIndex = 0, dumpHighestHighIndex = 0, dumpLowestLowIndex = 0, dumpLowestCloseIndex = 0;
+
+                double pumpHighestOpen = 0, pumpHighestHigh = 0, pumpLowestLow = 0, pumpLowestClose = 0;
+                int pumpHighestOpenIndex = 0, pumpHighestHighIndex = 0, pumpLowestLowIndex = 0, pumpLowestCloseIndex = 0;
+
+                List<double> dumpLineChart = new List<double>();
+                List<double> pumpLineChart = new List<double>();
 
                 for (int j = 0; j < TrenchSettings.Min1.DumpWidth; j++)
                 {
                     int key = i + j;
 
-                    if (key > candles.Count)
+                    if (key <= candles.Count) //if were not at the latest candle
                     {
-                        key = candles.Count;
-                    }
+                        if (candles[key].Open > dumpHighestOpen)
+                        {
+                            dumpHighestOpen = candles[key].Open;
+                            dumpHighestOpenIndex = key;
+                        }
+                        if (candles[key].High > dumpHighestHigh)
+                        {
+                            dumpHighestHigh = candles[key].High;
+                            dumpHighestHighIndex = key;
+                        }
+                        if (candles[key].Low < dumpLowestLow)
+                        {
+                            dumpLowestLow = candles[key].Low;
+                            dumpLowestLowIndex = key;
+                        }
+                        if (candles[key].Close < dumpLowestClose)
+                        {
+                            dumpLowestClose = candles[key].Close;
+                            dumpLowestCloseIndex = key;
+                        }
 
-                    if (candles[key].Open > highestOpen)
-                    {
-                        highestOpen = candles[key].Open;
+                        double line = (candles[key].Open + candles[key].High + candles[key].Low + candles[key].Close) / 4;
+                        dump.Add(candles[key]);
+                        dumpLineChart.Add(line);
                     }
-                    if (candles[key].High > highestHigh)
+                    else
                     {
-                        highestHigh = candles[key].High;
+                        break;
                     }
-                    if (candles[key].Low < lowestLow)
+                }
+
+                if (dumpLowestCloseIndex > dumpHighestOpenIndex) //first basic check to see if we're downtrending
+                {
+                    double firstHalf = 0;
+                    double secondHalf = 0;
+
+                    for (int j = 0; j < dumpLineChart.Count / 2; j++)
                     {
-                        lowestLow = candles[key].Low;
+                        firstHalf += dumpLineChart[j];
                     }
-                    if (candles[key].Close < lowestClose)
+                    firstHalf = dumpLineChart.Count / 2;
+
+                    for (int j = dumpLineChart.Count; j > dumpLineChart.Count / 2; j--)
                     {
-                        lowestClose = candles[key].Close;
+                        secondHalf += dumpLineChart[j];
                     }
+                    secondHalf = dumpLineChart.Count / 2;
 
 
+                    if (firstHalf > secondHalf) //check to see if the average of the first half is more than the average of the second half - more advanced downtrend check
+                    {
+                        var change = ((dumpLowestClose - dumpHighestOpen) / Math.Abs(dumpHighestOpen)) * 100;
+
+                        if (change > TrenchSettings.Min1.TrenchDumpValue)
+                        {
+                            foreach (var c in dump)
+                            {
+                                if (c.Open > trenchTail)
+                                {
+                                    trenchTail = c.Open;
+                                }
+                            }
+
+                            for (int j = 0; j < TrenchSettings.Min1.PumpWidth; j++)
+                            {
+                                int key = i + dump.Count + j;
+
+                                if (key <= candles.Count) //if were not at the latest candle
+                                {
+                                    if (candles[key].Open > pumpHighestOpen)
+                                    {
+                                        pumpHighestOpen = candles[key].Open;
+                                        pumpHighestOpenIndex = key;
+                                    }
+                                    if (candles[key].High > pumpHighestHigh)
+                                    {
+                                        pumpHighestHigh = candles[key].High;
+                                        pumpHighestHighIndex = key;
+                                    }
+                                    if (candles[key].Low < pumpLowestLow)
+                                    {
+                                        pumpLowestLow = candles[key].Low;
+                                        pumpLowestLowIndex = key;
+                                    }
+                                    if (candles[key].Close < pumpLowestClose)
+                                    {
+                                        pumpLowestClose = candles[key].Close;
+                                        pumpLowestCloseIndex = key;
+                                    }
+
+                                    double line = (candles[key].Open + candles[key].High + candles[key].Low + candles[key].Close) / 4;
+                                    pump.Add(candles[key]);
+                                    pumpLineChart.Add(line);
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+
+                            foreach (var c in pump)
+                            {
+                                if (c.Open > trenchHead)
+                                {
+                                    trenchHead = c.Open;
+                                }
+                            }
+
+                            if (trenchHead > trenchTail)
+                            {
+                                var trench = dump.Concat(pump);
+
+                                foreach (var c in trench)
+                                {
+                                    if (trenchBottom > c.Open)
+                                    {
+                                        trenchBottom = c.Open;
+                                    }
+                                }
+
+                                //create trade
+                            }
+                        }
+                    }
                 }
             }
 
