@@ -8,16 +8,20 @@ namespace Backtest
 {
     internal class User
     {
-        private static double startingBankroll;
-        private static double bankroll;
-        private static double percentageLoss;
-        private static double percentageWin;
+        private static double startingBankroll = 1000;
+        private static double bankroll = 1000;
+        private static double percentageTrade = 5;
+        private static double percentageLeverage = 20;
+        private static double percentageLoss = CalcualtePercentageLoss(1);
+        private static double percentageWin = CalcualtePercentageWin(1);
         private static double commission;
         private static double compound;
         private static double compoundAfterN;
 
         public static double StartingBankroll { get { return startingBankroll; } set { startingBankroll = value; } }
         public static double Bankroll { get { return bankroll; } set { bankroll = value; } }
+        public static double PercentageTrade { get { return percentageTrade; } set { percentageTrade = value; } }
+        public static double PercentageLeverage { get { return percentageLeverage; } set { percentageLeverage = value; } }
         public static double PercentageLoss { get { return percentageLoss; } set { CalcualtePercentageLoss(value); } }
         public static double PercentageWin { get { return percentageWin; } set { CalcualtePercentageWin(value); } }
         public static double Commission { get { return commission; } set { commission = value; } }
@@ -35,8 +39,9 @@ namespace Backtest
 
         private static double CalcualtePercentageWin(double v)
         {
-            string s = v.ToString();
-            s = s.Replace(".", "");
+            var tmp = v / 100;
+            string s = tmp.ToString();
+            s = s.Replace("0.", "");
             s = "1." + s;
             double value = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture);
             return value;

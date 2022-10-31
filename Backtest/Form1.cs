@@ -6,6 +6,8 @@ namespace Backtest
     public partial class Form1 : Form
     {
         ReadFile rf = new ReadFile();
+        List<Trade> trades = new List<Trade>();
+
         System.Windows.Forms.Timer _1MinTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _15MinTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _1HourTimer = new System.Windows.Forms.Timer();
@@ -146,7 +148,21 @@ namespace Backtest
 
                 _Plot.Plot.Clear();
                 _Plot.Plot.AddCandlesticks(PartitionChart.ToArray());
-                Trade t = Trench.ScanForTrench(PartitionChart, 1);
+                var Min1Scan = Trench.ScanForTrench(PartitionChart, 1);
+
+                if (Min1Scan != null)
+                {
+                    trades.Add(Min1Scan);
+                }
+
+
+                foreach (var trade in trades)
+                {
+                    _Plot.Plot.AddHorizontalLine(trade.TakeProfit, color: Color.Green);
+                    _Plot.Plot.AddHorizontalLine(trade.OpenPrice, color: Color.Blue);
+                    _Plot.Plot.AddHorizontalLine(trade.StopLoss, color: Color.Red);
+                }
+
                 _Plot.Plot.XAxis.DateTimeFormat(true);
                 _Plot.Plot.AxisAuto();
                 _Plot.Refresh();

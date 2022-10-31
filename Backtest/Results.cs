@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScottPlot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -77,36 +78,33 @@ namespace Backtest
 
     internal class Trade
     {
-        private DateTime date;
+        private DateTime openDate;
+        private DateTime closeDate;
         private double openPrice;
         private double amount;
         private double stopLoss;
         private double takeProfit;
         private bool won;
+        private List<OHLC> candles;
 
-        public Trade(double OP)
+        public Trade(double op, DateTime date, List<OHLC> c)
         {
-            OpenPrice = OP;
+            OpenPrice = op;
             TakeProfit = OpenPrice * User.PercentageWin;
             StopLoss = OpenPrice * User.PercentageLoss;
-
-            Calculate();
+            Amount = (User.Bankroll / 100) * User.PercentageTrade;
+            OpenDate = date;
+            Candles = c;
         }
 
-        public DateTime Date { get { return date; } set { date = value; } }
+        public DateTime OpenDate { get { return openDate; } set { openDate = value; } }
+        public DateTime CloseDate { get { return closeDate; } set { closeDate = value; } }
         public double OpenPrice { get { return openPrice; } set { openPrice = value; } }
         public double Amount { get { return amount; } set { amount = value; } }
         public double StopLoss { get { return stopLoss; } set { stopLoss = value; } }
         public double TakeProfit { get { return takeProfit; } set { takeProfit = value; } } 
         public bool Won { get { return won; } set { won = value; } }
-
-        public double Calculate()
-        {
-            double _amount = 0;
-            var tmp = User.Bankroll * User.PercentageLoss;
-            return _amount;
-        }
-
+        public List<OHLC> Candles { get { return candles; } set { candles = value; } }
     }
     internal class Result
     {
@@ -150,7 +148,7 @@ namespace Backtest
                 }
             }
 
-            sortedByDateList.Sort((x, y) => y.Date.CompareTo(x.Date));
+            sortedByDateList.Sort((x, y) => y.OpenDate.CompareTo(x.OpenDate));
 
             foreach (var trade in sortedByDateList)
             {
