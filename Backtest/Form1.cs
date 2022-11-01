@@ -6,7 +6,7 @@ namespace Backtest
     public partial class Form1 : Form
     {
         ReadFile rf = new ReadFile();
-        List<Trade> trades = new List<Trade>();
+        List<Trade> min1Trades = new List<Trade>();
 
         System.Windows.Forms.Timer _1MinTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _15MinTimer = new System.Windows.Forms.Timer();
@@ -16,7 +16,7 @@ namespace Backtest
         System.Windows.Forms.Timer _1DayTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _3DayTimer = new System.Windows.Forms.Timer();
 
-        int _1MinPosition = 0, _1MinInitNum = 0;
+        int _1MinPosition = 0, _1MinInitNum = 0, _1MinResetTradesCounter = 0;
         int _15MinPosition = 0, _15MinInitNum = 0;
         int _1HourPosition = 0, _1HourInitNum = 0;
         int _4HourPosition = 0, _4HourInitNum = 0;
@@ -103,6 +103,19 @@ namespace Backtest
                             if (_Position + TrenchSettings.Min1.TotalWidth <= candles.Length)
                             {
                                 _1MinPosition++;
+
+                                var Min1Scan = Trench.ScanForTrench(PartitionChart, 1);
+
+                                if (Min1Scan != null)
+                                {
+                                    min1Trades.Clear();
+                                    min1Trades.Add(Min1Scan);
+                                }
+
+                                if (min1Trades.Count > 0)
+                                {
+                                    _1MinResetTradesCounter++;
+                                }
                             }
                             break;
                         case 15:
@@ -148,18 +161,11 @@ namespace Backtest
 
                 _Plot.Plot.Clear();
                 _Plot.Plot.AddCandlesticks(PartitionChart.ToArray());
-                var Min1Scan = Trench.ScanForTrench(PartitionChart, 1);
 
-                if (Min1Scan != null)
-                {
-                    trades.Add(Min1Scan);
-                }
-
-
-                foreach (var trade in trades)
+                foreach (var trade in min1Trades)
                 {
                     _Plot.Plot.AddHorizontalLine(trade.TakeProfit, color: Color.Green);
-                    _Plot.Plot.AddHorizontalLine(trade.OpenPrice, color: Color.Blue);
+                    _Plot.Plot.AddHorizontalLine(trade.OpenPrice, color: Color.Gray);
                     _Plot.Plot.AddHorizontalLine(trade.StopLoss, color: Color.Red);
                 }
 

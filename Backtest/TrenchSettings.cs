@@ -30,7 +30,7 @@ namespace Backtest
         private int totalWidth = 100;
         private int dumpWidth = 15;
         private int pumpWidth = 30;
-        private double trenchDumpValue = 0.75;
+        private double trenchDumpValue = -0.5;
         private double trenchPumpValue;
         private bool trenchPumpClosedAboveDump;
 
@@ -132,7 +132,7 @@ namespace Backtest
                         {
                             var change = ((dumpLowestClose - dumpHighestOpen) / Math.Abs(dumpHighestOpen)) * 100;
 
-                            if (change > TrenchSettings.Min1.TrenchDumpValue)
+                            if (change <= TrenchSettings.Min1.TrenchDumpValue)
                             {
                                 foreach (var c in dump)
                                 {
@@ -193,10 +193,14 @@ namespace Backtest
                                     DateTime dt = new DateTime();
                                     foreach (var c in trench)
                                     {
-                                        if (trenchBottom > c.Open)
+                                        if (c.Close > c.Open) //check to see if the candle is positive
                                         {
-                                            trenchBottom = c.Open;
-                                            dt = c.DateTime;
+                                            if (trenchBottom > c.Close)
+                                            {
+                                                trenchBottom = c.Close;
+                                                dt = c.DateTime;
+                                            }
+
                                         }
                                     }
 
