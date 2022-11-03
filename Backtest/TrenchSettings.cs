@@ -27,16 +27,26 @@ namespace Backtest
     }
     internal class TrenchSetting
     {
-        private int totalWidth = 100;
+        private int totalWidth = 0;
+        private int trenchWidth = 0;
         private int dumpWidth = 15;
         private int pumpWidth = 30;
+        private int buffer = 205;
         private double trenchDumpValue = -0.5;
         private double trenchPumpValue;
         private bool trenchPumpClosedAboveDump;
 
+        public TrenchSetting()
+        {
+            TotalWidth = DumpWidth + PumpWidth + Buffer;
+            trenchWidth = DumpWidth + PumpWidth;
+        }
+
         public int TotalWidth { get { return totalWidth; } set { totalWidth = value; } }
         public int DumpWidth { get { return dumpWidth; } set { dumpWidth = value; } }
         public int PumpWidth { get { return pumpWidth; } set { pumpWidth = value; } }
+        public int TrenchWidth { get { return trenchWidth; } set { trenchWidth = value; } }
+        public int Buffer { get { return buffer; } set { buffer = value; } }
         public double TrenchDumpValue { get { return trenchDumpValue; } set { trenchDumpValue = value; } }
         public double TrenchPumpValue { get { return trenchPumpValue; } set { trenchPumpValue = value; } }
         public bool TrenchPumpClosedAboveDump { get { return trenchPumpClosedAboveDump; } set { trenchPumpClosedAboveDump = value; } }
@@ -191,6 +201,7 @@ namespace Backtest
                                 {
                                     var trench = dump.Concat(pump);
                                     DateTime dt = new DateTime();
+                                    dt = pump[pump.Count - 1].DateTime;
                                     foreach (var c in trench)
                                     {
                                         if (c.Close > c.Open) //check to see if the candle is positive
@@ -198,16 +209,13 @@ namespace Backtest
                                             if (trenchBottom > c.Close)
                                             {
                                                 trenchBottom = c.Close;
-                                                dt = c.DateTime;
                                             }
-
                                         }
                                     }
 
                                     var combined = dump.Concat(pump).ToList();
 
                                     Trade t = new Trade(trenchBottom, dt, combined);
-
                                     return t;
                                 }
                             }

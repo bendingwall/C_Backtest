@@ -16,7 +16,9 @@ namespace Backtest
         System.Windows.Forms.Timer _1DayTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _3DayTimer = new System.Windows.Forms.Timer();
 
-        int _1MinPosition = 0, _1MinInitNum = 0, _1MinResetTradesCounter = 0;
+        System.Windows.Forms.Timer ch = new System.Windows.Forms.Timer();
+
+        int _1MinPosition = 0, _1MinInitNum = 0, _1MinResetTradesCounter = 0, _1MinBreak = 0;
         int _15MinPosition = 0, _15MinInitNum = 0;
         int _1HourPosition = 0, _1HourInitNum = 0;
         int _4HourPosition = 0, _4HourInitNum = 0;
@@ -24,10 +26,16 @@ namespace Backtest
         int _1DayPosition = 0, _1DayInitNum = 0;
         int _3DayPosition = 0, _3DayInitNum = 0;
 
+        bool min1InTrade = false;
+
+        ScottPlot.Plottable.Crosshair Crosshair;
+
         public Form1()
         {            
             InitializeComponent();
-
+            ch.Start();
+            ch.Interval = 1;
+            ch.Tick += new EventHandler((sender, e) => UpdateCursor(null, null, _1MinPlot));
             _1MinInitNum = TrenchSettings.Min1.TotalWidth - 1;
             _15MinInitNum = TrenchSettings.Min15.TotalWidth - 1;
             _1HourInitNum = TrenchSettings.Hour1.TotalWidth - 1;
@@ -56,6 +64,7 @@ namespace Backtest
                             PartitionChart.Add(candles[i]);
                         }
                     }
+
                     switch (timeframe)
                     {
                         case 1:
@@ -83,7 +92,8 @@ namespace Backtest
                             break;
                     }
                 }
-                else
+
+                if (InitNum <= 0)
                 {
                     for (int i = 0; i < trench.TotalWidth; i++)
                     {
@@ -96,26 +106,12 @@ namespace Backtest
                             PartitionChart.Add(candles[_Position + i]);
                         }
                     }
-
                     switch (timeframe)
                     {
                         case 1:
                             if (_Position + TrenchSettings.Min1.TotalWidth <= candles.Length)
                             {
                                 _1MinPosition++;
-
-                                var Min1Scan = Trench.ScanForTrench(PartitionChart, 1);
-
-                                if (Min1Scan != null)
-                                {
-                                    min1Trades.Clear();
-                                    min1Trades.Add(Min1Scan);
-                                }
-
-                                if (min1Trades.Count > 0)
-                                {
-                                    _1MinResetTradesCounter++;
-                                }
                             }
                             break;
                         case 15:
@@ -159,20 +155,156 @@ namespace Backtest
                     }
                 }
 
+                switch (timeframe)
+                {
+                    case 1:
+                        if (_Position + TrenchSettings.Min1.TrenchWidth <= candles.Length)
+                        {
+                            var Min1Scan = Trench.ScanForTrench(PartitionChart, 1);
+
+                            if (Min1Scan != null)
+                            {
+                                if (_1MinBreak <= 0)
+                                {
+                                    if (!min1InTrade)
+                                    {
+                                        min1Trades.Clear();
+                                        min1Trades.Add(Min1Scan);
+                                        _1MinResetTradesCounter = 0;
+                                        min1InTrade = true;
+                                        _1MinBreak = TrenchSettings.Min1.TrenchWidth;
+                                    }
+                                }
+                                else
+                                {
+                                    _1MinBreak--;
+                                }
+                            }
+                        }
+                        break;
+                    case 15:
+
+                        break;
+                    case 60:
+
+                        break;
+                    case 4:
+
+                        break;
+                    case 12:
+
+                        break;
+                    case 24:
+
+                        break;
+                    case 3:
+
+                        break;
+                    default:
+                        break;
+                }
+
                 _Plot.Plot.Clear();
                 _Plot.Plot.AddCandlesticks(PartitionChart.ToArray());
 
+
                 foreach (var trade in min1Trades)
                 {
-                    _Plot.Plot.AddHorizontalLine(trade.TakeProfit, color: Color.Green);
-                    _Plot.Plot.AddHorizontalLine(trade.OpenPrice, color: Color.Gray);
-                    _Plot.Plot.AddHorizontalLine(trade.StopLoss, color: Color.Red);
+                    _Plot.Plot.AddHorizontalLine(trade.TakeProfit, color: Color.Green, label: trade.TakeProfit.ToString());
+
+                    if (trade.TradeState.Filled)
+                    {
+                        _Plot.Plot.AddHorizontalLine(trade.OpenPrice, color: Color.Blue, label: trade.OpenPrice.ToString());
+                    }
+                    else
+                    {
+                        _Plot.Plot.AddHorizontalLine(trade.OpenPrice, color: Color.Gray, label: trade.OpenPrice.ToString());
+                    }
+
+                    _Plot.Plot.AddHorizontalLine(trade.StopLoss, color: Color.Red, label: trade.StopLoss.ToString());
+
+                    if (trade.TradeState.Filled)
+                    {
+                        if (PartitionChart[PartitionChart.Count - 1].High > trade.TakeProfit) //trade won
+                        {
+                            trade.Won = true;
+                            trade.TradeState.Closed = true;
+                            trade.CloseDate = PartitionChart[PartitionChart.Count - 1].DateTime;
+                            Results.Min1.AddTrade(trade);
+                            min1Trades.Clear();
+                            min1InTrade = false;
+                            break;
+                        }
+                        else if (PartitionChart[PartitionChart.Count - 1].Low < trade.StopLoss) //trade lost
+                        {
+                            trade.Won = false;
+                            trade.TradeState.Closed = true;
+                            trade.CloseDate = PartitionChart[PartitionChart.Count - 1].DateTime;
+                            Results.Min1.AddTrade(trade);
+                            min1Trades.Clear();
+                            min1InTrade = false;
+                            break;
+                        }
+                        else if (PartitionChart[PartitionChart.Count - 1].High > trade.TakeProfit && PartitionChart[PartitionChart.Count - 1].Low < trade.StopLoss) //need to do an extra scan on the 1 min for this day to determine if the trade was a win/loss, for now just set as loss
+                        {
+                            trade.Won = false;
+                            trade.TradeState.Closed = true;
+                            trade.CloseDate = PartitionChart[PartitionChart.Count - 1].DateTime;
+                            Results.Min1.AddTrade(trade);
+                            min1Trades.Clear();
+                            min1InTrade = false;
+                            break;
+                        }
+                    }
+                    else if (trade.TradeState.Open)
+                    {
+                        if (PartitionChart[PartitionChart.Count - 1].Low < trade.OpenPrice)
+                        {
+                            trade.TradeState.Filled = true;
+                            _1MinResetTradesCounter = 0;
+                        }
+                    }
+                }
+
+                _1MinResetTradesCounter++;
+                if (_1MinResetTradesCounter >= 100)
+                {
+                    min1Trades.Clear();
+                    min1InTrade = false;
                 }
 
                 _Plot.Plot.XAxis.DateTimeFormat(true);
                 _Plot.Plot.AxisAuto();
-                _Plot.Refresh();
+                _Plot.Update();
             }
+        }
+
+        private void UpdateCursor(object sender, MouseEventArgs e, FormsPlot _Plot)
+        {
+            _Plot.Plot.Remove(Crosshair);
+            Crosshair = _Plot.Plot.AddCrosshair(0, 0);
+            MouseMoved(null, null, _Plot);
+        }
+
+        private void MouseMoved(object sender, MouseEventArgs e, FormsPlot _Plot)
+        {
+            (double coordinateX, double coordinateY) = _Plot.GetMouseCoordinates();
+
+            Crosshair.X = coordinateX;
+            Crosshair.Y = coordinateY;
+
+            _Plot.Refresh(lowQuality: true, skipIfCurrentlyRendering: true);
+        }
+
+        private void MouseEnter(object sender, EventArgs e)
+        {
+            Crosshair.IsVisible = true;
+        }
+
+        private void MouseLeave(object sender, EventArgs e, FormsPlot _Plot)
+        {
+            Crosshair.IsVisible = false;
+            _Plot.Refresh();
         }
 
         private void SetTimerSpeeds()
@@ -188,32 +320,32 @@ namespace Backtest
 
         private void _3DayPlot_Load(object sender, EventArgs e)
         {
-            _3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, TrenchSettings.Hour1, _3DayPlot, _3DayInitNum, _3DayTimer));
+            //_3DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles3d, _3DayPosition, 3, TrenchSettings.Hour1, _3DayPlot, _3DayInitNum, _3DayTimer));
         }
 
         private void _1DayPlot_Load(object sender, EventArgs e)
         {
-            _1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, TrenchSettings.Day1, _1DayPlot, _1DayInitNum, _1DayTimer));
+            //_1DayTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1d, _1DayPosition, 24, TrenchSettings.Day1, _1DayPlot, _1DayInitNum, _1DayTimer));
         }
 
         private void _12HourPlot_Load(object sender, EventArgs e)
         {
-            _12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, TrenchSettings.Hour12, _12HourPlot, _12HourInitNum, _12HourTimer));
+            //_12HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles12h, _12HourPosition, 12, TrenchSettings.Hour12, _12HourPlot, _12HourInitNum, _12HourTimer));
         }
 
         private void _4HourPlot_Load(object sender, EventArgs e)
         {
-            _4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, TrenchSettings.Hour4, _4HourPlot, _4HourInitNum, _4HourTimer));
+            //_4HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles4h, _4HourPosition, 4, TrenchSettings.Hour4, _4HourPlot, _4HourInitNum, _4HourTimer));
         }
 
         private void _1HourPlot_Load(object sender, EventArgs e)
         {
-            _1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, TrenchSettings.Hour1, _1HourPlot, _1HourInitNum, _1HourTimer));
+            //_1HourTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles1h, _1HourPosition, 60, TrenchSettings.Hour1, _1HourPlot, _1HourInitNum, _1HourTimer));
         }
 
         private void _15MinPlot_Load(object sender, EventArgs e)
         {
-            _15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, TrenchSettings.Min15, _15MinPlot, _15MinInitNum, _15MinTimer));
+            //_15MinTimer.Tick += new EventHandler((sender, e) => StepByStepCharts(sender, e, Candles.Candles15m, _15MinPosition, 15, TrenchSettings.Min15, _15MinPlot, _15MinInitNum, _15MinTimer));
         }
 
         private void _1MinPlot_Load(object sender, EventArgs e)

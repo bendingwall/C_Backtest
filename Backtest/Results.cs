@@ -76,8 +76,32 @@ namespace Backtest
         }
     }
 
+    internal class TradeState
+    {
+        private bool open;
+        private bool filled;
+        private bool closed;
+
+        public bool Open { get { return open; } set { SetState(); open = value; } }
+        public bool Filled { get { return filled; } set { SetState(); filled = value; } }
+        public bool Closed { get { return closed; } set { SetState(); closed = value; } }
+
+        public TradeState()
+        {
+            open = true;
+        }
+
+        private void SetState()
+        {
+            open = false;
+            filled = false;
+            closed = false;
+        }
+    }
+
     internal class Trade
     {
+        private TradeState tradeState;
         private DateTime openDate;
         private DateTime closeDate;
         private double openPrice;
@@ -95,8 +119,9 @@ namespace Backtest
             Amount = (User.Bankroll / 100) * User.PercentageTrade;
             OpenDate = date;
             Candles = c;
+            TradeState = new TradeState();
         }
-
+        public TradeState TradeState { get { return tradeState; } set { tradeState = value; } }
         public DateTime OpenDate { get { return openDate; } set { openDate = value; } }
         public DateTime CloseDate { get { return closeDate; } set { closeDate = value; } }
         public double OpenPrice { get { return openPrice; } set { openPrice = value; } }

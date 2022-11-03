@@ -36,21 +36,21 @@
             this.PauseButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
             this.AllPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.AllAvgDD = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.AllMaxDD = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.AllDD = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.AllROI = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.AllWinPer = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.AllWins = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.AllTrades = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.AllPNL = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.TimeframeButtons = new System.Windows.Forms.TabControl();
             this._3Day = new System.Windows.Forms.TabPage();
@@ -170,21 +170,21 @@
             this._1Min = new System.Windows.Forms.TabPage();
             this._1MinPlot = new ScottPlot.FormsPlot();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label97 = new System.Windows.Forms.Label();
+            this.Min1AvgDD = new System.Windows.Forms.Label();
             this.label98 = new System.Windows.Forms.Label();
-            this.label99 = new System.Windows.Forms.Label();
+            this.Min1MaxDD = new System.Windows.Forms.Label();
             this.label100 = new System.Windows.Forms.Label();
-            this.label101 = new System.Windows.Forms.Label();
+            this.Min1DD = new System.Windows.Forms.Label();
             this.label102 = new System.Windows.Forms.Label();
-            this.label103 = new System.Windows.Forms.Label();
+            this.Min1ROI = new System.Windows.Forms.Label();
             this.label104 = new System.Windows.Forms.Label();
-            this.label105 = new System.Windows.Forms.Label();
+            this.Min1WinPer = new System.Windows.Forms.Label();
             this.label106 = new System.Windows.Forms.Label();
-            this.label107 = new System.Windows.Forms.Label();
+            this.Min1Wins = new System.Windows.Forms.Label();
             this.label108 = new System.Windows.Forms.Label();
-            this.label109 = new System.Windows.Forms.Label();
+            this.Min1Trades = new System.Windows.Forms.Label();
             this.label110 = new System.Windows.Forms.Label();
-            this.label111 = new System.Windows.Forms.Label();
+            this.Min1PNL = new System.Windows.Forms.Label();
             this.label112 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.MenuBacktester = new System.Windows.Forms.TabPage();
@@ -315,21 +315,21 @@
             // AllPanel
             // 
             this.AllPanel.BackColor = System.Drawing.Color.Gainsboro;
-            this.AllPanel.Controls.Add(this.label1);
+            this.AllPanel.Controls.Add(this.AllAvgDD);
             this.AllPanel.Controls.Add(this.label2);
-            this.AllPanel.Controls.Add(this.label3);
+            this.AllPanel.Controls.Add(this.AllMaxDD);
             this.AllPanel.Controls.Add(this.label4);
-            this.AllPanel.Controls.Add(this.label5);
+            this.AllPanel.Controls.Add(this.AllDD);
             this.AllPanel.Controls.Add(this.label6);
-            this.AllPanel.Controls.Add(this.label7);
+            this.AllPanel.Controls.Add(this.AllROI);
             this.AllPanel.Controls.Add(this.label8);
-            this.AllPanel.Controls.Add(this.label9);
+            this.AllPanel.Controls.Add(this.AllWinPer);
             this.AllPanel.Controls.Add(this.label10);
-            this.AllPanel.Controls.Add(this.label11);
+            this.AllPanel.Controls.Add(this.AllWins);
             this.AllPanel.Controls.Add(this.label12);
-            this.AllPanel.Controls.Add(this.label13);
+            this.AllPanel.Controls.Add(this.AllTrades);
             this.AllPanel.Controls.Add(this.label14);
-            this.AllPanel.Controls.Add(this.label15);
+            this.AllPanel.Controls.Add(this.AllPNL);
             this.AllPanel.Controls.Add(this.label16);
             this.AllPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.AllPanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
@@ -338,19 +338,19 @@
             this.AllPanel.Size = new System.Drawing.Size(1168, 44);
             this.AllPanel.TabIndex = 1;
             // 
-            // label1
+            // AllAvgDD
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(1070, 0);
-            this.label1.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label1.Size = new System.Drawing.Size(97, 40);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "#";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllAvgDD.AutoSize = true;
+            this.AllAvgDD.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllAvgDD.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllAvgDD.Location = new System.Drawing.Point(1070, 0);
+            this.AllAvgDD.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllAvgDD.Name = "AllAvgDD";
+            this.AllAvgDD.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllAvgDD.Size = new System.Drawing.Size(97, 40);
+            this.AllAvgDD.TabIndex = 12;
+            this.AllAvgDD.Text = "#";
+            this.AllAvgDD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
@@ -364,19 +364,19 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Avg DD:";
             // 
-            // label3
+            // AllMaxDD
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(909, 0);
-            this.label3.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label3.Size = new System.Drawing.Size(97, 40);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "#";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllMaxDD.AutoSize = true;
+            this.AllMaxDD.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllMaxDD.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllMaxDD.Location = new System.Drawing.Point(909, 0);
+            this.AllMaxDD.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllMaxDD.Name = "AllMaxDD";
+            this.AllMaxDD.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllMaxDD.Size = new System.Drawing.Size(97, 40);
+            this.AllMaxDD.TabIndex = 11;
+            this.AllMaxDD.Text = "#";
+            this.AllMaxDD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
@@ -390,19 +390,19 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Max DD:";
             // 
-            // label5
+            // AllDD
             // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(746, 0);
-            this.label5.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label5.Size = new System.Drawing.Size(97, 40);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "#";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllDD.AutoSize = true;
+            this.AllDD.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllDD.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllDD.Location = new System.Drawing.Point(746, 0);
+            this.AllDD.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllDD.Name = "AllDD";
+            this.AllDD.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllDD.Size = new System.Drawing.Size(97, 40);
+            this.AllDD.TabIndex = 13;
+            this.AllDD.Text = "#";
+            this.AllDD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
             // 
@@ -416,19 +416,19 @@
             this.label6.TabIndex = 3;
             this.label6.Text = "DD:";
             // 
-            // label7
+            // AllROI
             // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(615, 0);
-            this.label7.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label7.Size = new System.Drawing.Size(97, 40);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "#";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllROI.AutoSize = true;
+            this.AllROI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllROI.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllROI.Location = new System.Drawing.Point(615, 0);
+            this.AllROI.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllROI.Name = "AllROI";
+            this.AllROI.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllROI.Size = new System.Drawing.Size(97, 40);
+            this.AllROI.TabIndex = 10;
+            this.AllROI.Text = "#";
+            this.AllROI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8
             // 
@@ -442,19 +442,19 @@
             this.label8.TabIndex = 6;
             this.label8.Text = "ROI:";
             // 
-            // label9
+            // AllWinPer
             // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(482, 0);
-            this.label9.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label9.Size = new System.Drawing.Size(97, 40);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "#";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllWinPer.AutoSize = true;
+            this.AllWinPer.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllWinPer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllWinPer.Location = new System.Drawing.Point(482, 0);
+            this.AllWinPer.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllWinPer.Name = "AllWinPer";
+            this.AllWinPer.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllWinPer.Size = new System.Drawing.Size(97, 40);
+            this.AllWinPer.TabIndex = 9;
+            this.AllWinPer.Text = "#";
+            this.AllWinPer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label10
             // 
@@ -468,19 +468,19 @@
             this.label10.TabIndex = 2;
             this.label10.Text = "% Win:";
             // 
-            // label11
+            // AllWins
             // 
-            this.label11.AutoSize = true;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(331, 0);
-            this.label11.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label11.Name = "label11";
-            this.label11.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label11.Size = new System.Drawing.Size(97, 40);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "#";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllWins.AutoSize = true;
+            this.AllWins.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllWins.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllWins.Location = new System.Drawing.Point(331, 0);
+            this.AllWins.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllWins.Name = "AllWins";
+            this.AllWins.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllWins.Size = new System.Drawing.Size(97, 40);
+            this.AllWins.TabIndex = 15;
+            this.AllWins.Text = "#";
+            this.AllWins.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label12
             // 
@@ -494,19 +494,19 @@
             this.label12.TabIndex = 14;
             this.label12.Text = "Wins:";
             // 
-            // label13
+            // AllTrades
             // 
-            this.label13.AutoSize = true;
-            this.label13.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label13.Location = new System.Drawing.Point(190, 0);
-            this.label13.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label13.Name = "label13";
-            this.label13.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label13.Size = new System.Drawing.Size(97, 40);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "#";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllTrades.AutoSize = true;
+            this.AllTrades.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllTrades.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllTrades.Location = new System.Drawing.Point(190, 0);
+            this.AllTrades.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllTrades.Name = "AllTrades";
+            this.AllTrades.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllTrades.Size = new System.Drawing.Size(97, 40);
+            this.AllTrades.TabIndex = 8;
+            this.AllTrades.Text = "#";
+            this.AllTrades.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label14
             // 
@@ -520,19 +520,19 @@
             this.label14.TabIndex = 1;
             this.label14.Text = "Trades:";
             // 
-            // label15
+            // AllPNL
             // 
-            this.label15.AutoSize = true;
-            this.label15.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label15.Location = new System.Drawing.Point(38, 0);
-            this.label15.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label15.Name = "label15";
-            this.label15.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label15.Size = new System.Drawing.Size(97, 40);
-            this.label15.TabIndex = 7;
-            this.label15.Text = "#";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AllPNL.AutoSize = true;
+            this.AllPNL.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AllPNL.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.AllPNL.Location = new System.Drawing.Point(38, 0);
+            this.AllPNL.MinimumSize = new System.Drawing.Size(97, 0);
+            this.AllPNL.Name = "AllPNL";
+            this.AllPNL.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.AllPNL.Size = new System.Drawing.Size(97, 40);
+            this.AllPNL.TabIndex = 7;
+            this.AllPNL.Text = "#";
+            this.AllPNL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label16
             // 
@@ -2135,21 +2135,21 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel6.Controls.Add(this.label97);
+            this.panel6.Controls.Add(this.Min1AvgDD);
             this.panel6.Controls.Add(this.label98);
-            this.panel6.Controls.Add(this.label99);
+            this.panel6.Controls.Add(this.Min1MaxDD);
             this.panel6.Controls.Add(this.label100);
-            this.panel6.Controls.Add(this.label101);
+            this.panel6.Controls.Add(this.Min1DD);
             this.panel6.Controls.Add(this.label102);
-            this.panel6.Controls.Add(this.label103);
+            this.panel6.Controls.Add(this.Min1ROI);
             this.panel6.Controls.Add(this.label104);
-            this.panel6.Controls.Add(this.label105);
+            this.panel6.Controls.Add(this.Min1WinPer);
             this.panel6.Controls.Add(this.label106);
-            this.panel6.Controls.Add(this.label107);
+            this.panel6.Controls.Add(this.Min1Wins);
             this.panel6.Controls.Add(this.label108);
-            this.panel6.Controls.Add(this.label109);
+            this.panel6.Controls.Add(this.Min1Trades);
             this.panel6.Controls.Add(this.label110);
-            this.panel6.Controls.Add(this.label111);
+            this.panel6.Controls.Add(this.Min1PNL);
             this.panel6.Controls.Add(this.label112);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.ForeColor = System.Drawing.SystemColors.ActiveCaption;
@@ -2158,19 +2158,19 @@
             this.panel6.Size = new System.Drawing.Size(1160, 44);
             this.panel6.TabIndex = 1;
             // 
-            // label97
+            // Min1AvgDD
             // 
-            this.label97.AutoSize = true;
-            this.label97.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label97.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label97.Location = new System.Drawing.Point(1070, 0);
-            this.label97.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label97.Name = "label97";
-            this.label97.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label97.Size = new System.Drawing.Size(97, 40);
-            this.label97.TabIndex = 12;
-            this.label97.Text = "#";
-            this.label97.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1AvgDD.AutoSize = true;
+            this.Min1AvgDD.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1AvgDD.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1AvgDD.Location = new System.Drawing.Point(1070, 0);
+            this.Min1AvgDD.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1AvgDD.Name = "Min1AvgDD";
+            this.Min1AvgDD.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1AvgDD.Size = new System.Drawing.Size(97, 40);
+            this.Min1AvgDD.TabIndex = 12;
+            this.Min1AvgDD.Text = "#";
+            this.Min1AvgDD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label98
             // 
@@ -2184,19 +2184,19 @@
             this.label98.TabIndex = 5;
             this.label98.Text = "Avg DD:";
             // 
-            // label99
+            // Min1MaxDD
             // 
-            this.label99.AutoSize = true;
-            this.label99.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label99.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label99.Location = new System.Drawing.Point(909, 0);
-            this.label99.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label99.Name = "label99";
-            this.label99.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label99.Size = new System.Drawing.Size(97, 40);
-            this.label99.TabIndex = 11;
-            this.label99.Text = "#";
-            this.label99.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1MaxDD.AutoSize = true;
+            this.Min1MaxDD.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1MaxDD.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1MaxDD.Location = new System.Drawing.Point(909, 0);
+            this.Min1MaxDD.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1MaxDD.Name = "Min1MaxDD";
+            this.Min1MaxDD.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1MaxDD.Size = new System.Drawing.Size(97, 40);
+            this.Min1MaxDD.TabIndex = 11;
+            this.Min1MaxDD.Text = "#";
+            this.Min1MaxDD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label100
             // 
@@ -2210,19 +2210,19 @@
             this.label100.TabIndex = 4;
             this.label100.Text = "Max DD:";
             // 
-            // label101
+            // Min1DD
             // 
-            this.label101.AutoSize = true;
-            this.label101.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label101.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label101.Location = new System.Drawing.Point(746, 0);
-            this.label101.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label101.Name = "label101";
-            this.label101.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label101.Size = new System.Drawing.Size(97, 40);
-            this.label101.TabIndex = 13;
-            this.label101.Text = "#";
-            this.label101.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1DD.AutoSize = true;
+            this.Min1DD.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1DD.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1DD.Location = new System.Drawing.Point(746, 0);
+            this.Min1DD.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1DD.Name = "Min1DD";
+            this.Min1DD.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1DD.Size = new System.Drawing.Size(97, 40);
+            this.Min1DD.TabIndex = 13;
+            this.Min1DD.Text = "#";
+            this.Min1DD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label102
             // 
@@ -2236,19 +2236,19 @@
             this.label102.TabIndex = 3;
             this.label102.Text = "DD:";
             // 
-            // label103
+            // Min1ROI
             // 
-            this.label103.AutoSize = true;
-            this.label103.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label103.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label103.Location = new System.Drawing.Point(615, 0);
-            this.label103.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label103.Name = "label103";
-            this.label103.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label103.Size = new System.Drawing.Size(97, 40);
-            this.label103.TabIndex = 10;
-            this.label103.Text = "#";
-            this.label103.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1ROI.AutoSize = true;
+            this.Min1ROI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1ROI.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1ROI.Location = new System.Drawing.Point(615, 0);
+            this.Min1ROI.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1ROI.Name = "Min1ROI";
+            this.Min1ROI.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1ROI.Size = new System.Drawing.Size(97, 40);
+            this.Min1ROI.TabIndex = 10;
+            this.Min1ROI.Text = "#";
+            this.Min1ROI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label104
             // 
@@ -2262,19 +2262,19 @@
             this.label104.TabIndex = 6;
             this.label104.Text = "ROI:";
             // 
-            // label105
+            // Min1WinPer
             // 
-            this.label105.AutoSize = true;
-            this.label105.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label105.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label105.Location = new System.Drawing.Point(482, 0);
-            this.label105.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label105.Name = "label105";
-            this.label105.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label105.Size = new System.Drawing.Size(97, 40);
-            this.label105.TabIndex = 9;
-            this.label105.Text = "#";
-            this.label105.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1WinPer.AutoSize = true;
+            this.Min1WinPer.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1WinPer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1WinPer.Location = new System.Drawing.Point(482, 0);
+            this.Min1WinPer.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1WinPer.Name = "Min1WinPer";
+            this.Min1WinPer.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1WinPer.Size = new System.Drawing.Size(97, 40);
+            this.Min1WinPer.TabIndex = 9;
+            this.Min1WinPer.Text = "#";
+            this.Min1WinPer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label106
             // 
@@ -2288,19 +2288,19 @@
             this.label106.TabIndex = 2;
             this.label106.Text = "% Win:";
             // 
-            // label107
+            // Min1Wins
             // 
-            this.label107.AutoSize = true;
-            this.label107.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label107.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label107.Location = new System.Drawing.Point(331, 0);
-            this.label107.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label107.Name = "label107";
-            this.label107.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label107.Size = new System.Drawing.Size(97, 40);
-            this.label107.TabIndex = 15;
-            this.label107.Text = "#";
-            this.label107.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1Wins.AutoSize = true;
+            this.Min1Wins.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1Wins.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1Wins.Location = new System.Drawing.Point(331, 0);
+            this.Min1Wins.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1Wins.Name = "Min1Wins";
+            this.Min1Wins.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1Wins.Size = new System.Drawing.Size(97, 40);
+            this.Min1Wins.TabIndex = 15;
+            this.Min1Wins.Text = "#";
+            this.Min1Wins.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label108
             // 
@@ -2314,19 +2314,19 @@
             this.label108.TabIndex = 14;
             this.label108.Text = "Wins:";
             // 
-            // label109
+            // Min1Trades
             // 
-            this.label109.AutoSize = true;
-            this.label109.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label109.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label109.Location = new System.Drawing.Point(190, 0);
-            this.label109.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label109.Name = "label109";
-            this.label109.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label109.Size = new System.Drawing.Size(97, 40);
-            this.label109.TabIndex = 8;
-            this.label109.Text = "#";
-            this.label109.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1Trades.AutoSize = true;
+            this.Min1Trades.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1Trades.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1Trades.Location = new System.Drawing.Point(190, 0);
+            this.Min1Trades.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1Trades.Name = "Min1Trades";
+            this.Min1Trades.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1Trades.Size = new System.Drawing.Size(97, 40);
+            this.Min1Trades.TabIndex = 8;
+            this.Min1Trades.Text = "#";
+            this.Min1Trades.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label110
             // 
@@ -2340,19 +2340,19 @@
             this.label110.TabIndex = 1;
             this.label110.Text = "Trades:";
             // 
-            // label111
+            // Min1PNL
             // 
-            this.label111.AutoSize = true;
-            this.label111.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label111.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label111.Location = new System.Drawing.Point(38, 0);
-            this.label111.MinimumSize = new System.Drawing.Size(97, 0);
-            this.label111.Name = "label111";
-            this.label111.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.label111.Size = new System.Drawing.Size(97, 40);
-            this.label111.TabIndex = 7;
-            this.label111.Text = "#";
-            this.label111.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Min1PNL.AutoSize = true;
+            this.Min1PNL.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Min1PNL.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Min1PNL.Location = new System.Drawing.Point(38, 0);
+            this.Min1PNL.MinimumSize = new System.Drawing.Size(97, 0);
+            this.Min1PNL.Name = "Min1PNL";
+            this.Min1PNL.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.Min1PNL.Size = new System.Drawing.Size(97, 40);
+            this.Min1PNL.TabIndex = 7;
+            this.Min1PNL.Text = "#";
+            this.Min1PNL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label112
             // 
@@ -2481,21 +2481,21 @@
         private Label _3DayWins;
         private Label _3DayWins_Label;
         private Panel AllPanel;
-        private Label label1;
+        private Label AllAvgDD;
         private Label label2;
-        private Label label3;
+        private Label AllMaxDD;
         private Label label4;
-        private Label label5;
+        private Label AllDD;
         private Label label6;
-        private Label label7;
+        private Label AllROI;
         private Label label8;
-        private Label label9;
+        private Label AllWinPer;
         private Label label10;
-        private Label label11;
+        private Label AllWins;
         private Label label12;
-        private Label label13;
+        private Label AllTrades;
         private Label label14;
-        private Label label15;
+        private Label AllPNL;
         private Label label16;
         private TabControl tabControl1;
         private TabPage MenuBacktester;
@@ -2597,21 +2597,21 @@
         private Label label96;
         private ScottPlot.FormsPlot _1MinPlot;
         private Panel panel6;
-        private Label label97;
+        private Label Min1AvgDD;
         private Label label98;
-        private Label label99;
+        private Label Min1MaxDD;
         private Label label100;
-        private Label label101;
+        private Label Min1DD;
         private Label label102;
-        private Label label103;
+        private Label Min1ROI;
         private Label label104;
-        private Label label105;
+        private Label Min1WinPer;
         private Label label106;
-        private Label label107;
+        private Label Min1Wins;
         private Label label108;
-        private Label label109;
+        private Label Min1Trades;
         private Label label110;
-        private Label label111;
+        private Label Min1PNL;
         private Label label112;
         private Button RefreshButton;
     }
