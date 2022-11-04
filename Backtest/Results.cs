@@ -39,6 +39,12 @@ namespace Backtest
             allResults.Add(day3);
             all.CalculateAll(allResults);
         }
+
+        private static void UpdateGUI()
+        {
+            
+        }
+
         public static void Add1MinTrade(Trade t)
         {
             min1.AddTrade(t);
@@ -134,8 +140,6 @@ namespace Backtest
     internal class Result
     {
         private double pnl;
-        private double startingBankroll;
-        private double bankroll;
         private double percentagewin;
         private double roi;
         private double dd;
@@ -145,8 +149,6 @@ namespace Backtest
         private List<Trade> trades = new List<Trade>();
 
         public double PNL { get { return pnl; } set { pnl = value; } }
-        public double StartingBankroll { get { return startingBankroll; } set { startingBankroll = value; } }
-        public double Bankroll { get { return bankroll; } set { bankroll = value; } }
         public double PercentageWin { get { return percentagewin; } set { percentagewin = value; } }
         public double ROI { get { return roi; } set { roi = value; } }
         public double DD { get { return dd; } set { dd = value; } }
@@ -158,6 +160,10 @@ namespace Backtest
         public void AddTrade(Trade t)
         {
             trades.Add(t);
+            if (t.Won)
+            {
+
+            }
             Calculate();
         }
 
@@ -184,7 +190,7 @@ namespace Backtest
         public void Calculate()
         {
             double tmpPNL = 0;
-            double highestPNL = startingBankroll;
+            double highestPNL = User.StartingBankroll;
             double currentDD = 0;
             double maxDD = 0;
             double lowestLastDD = 0;
@@ -196,13 +202,13 @@ namespace Backtest
 
                 if (trade.Won)
                 {
-                    var profitPercentage = ((trade.TakeProfit - trade.OpenPrice) / Math.Abs(trade.OpenPrice));
+                    var profitPercentage = ((trade.TakeProfit - trade.OpenPrice) / trade.OpenPrice);
                     tmpPNL += (trade.Amount * profitPercentage);
                     wins++;
                 }
                 else
                 {
-                    var lossPercentage = ((trade.StopLoss - trade.OpenPrice) / Math.Abs(trade.OpenPrice));
+                    var lossPercentage = ((trade.StopLoss - trade.OpenPrice) / trade.OpenPrice);
                     tmpPNL -= (trade.Amount * lossPercentage);
                     inDD = true;
                 }
@@ -247,9 +253,11 @@ namespace Backtest
             }
             double avgDD = dds / allDDs.Count();
 
-            ROI = (((Bankroll / StartingBankroll) * 100) - 100);
-            PercentageWin = ((wins / trades.Count) * 100);
-            PNL = tmpPNL;
+            double pw = wins / trades.Count * 100;
+            PercentageWin = Math.Round(pw, 2);
+            PNL = Math.Round(tmpPNL, 2);
+            User.Bankroll += PNL;
+            ROI = User.Bankroll / User.StartingBankroll * 100 - 100;
             DD = currentDD;
             MaxDD = maxDD;
             AvgDD = avgDD;

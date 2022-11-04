@@ -7,6 +7,7 @@ namespace Backtest
     {
         ReadFile rf = new ReadFile();
         List<Trade> min1Trades = new List<Trade>();
+        Trade lastTrade = new Trade(0.0, DateTime.Now, null);
 
         System.Windows.Forms.Timer _1MinTimer = new System.Windows.Forms.Timer();
         System.Windows.Forms.Timer _15MinTimer = new System.Windows.Forms.Timer();
@@ -92,8 +93,7 @@ namespace Backtest
                             break;
                     }
                 }
-
-                if (InitNum <= 0)
+                else
                 {
                     for (int i = 0; i < trench.TotalWidth; i++)
                     {
@@ -154,7 +154,6 @@ namespace Backtest
                             break;
                     }
                 }
-
                 switch (timeframe)
                 {
                     case 1:
@@ -166,13 +165,16 @@ namespace Backtest
                             {
                                 if (_1MinBreak <= 0)
                                 {
-                                    if (!min1InTrade)
+                                    if (!min1InTrade && lastTrade.OpenPrice != Min1Scan.OpenPrice)
                                     {
-                                        min1Trades.Clear();
-                                        min1Trades.Add(Min1Scan);
-                                        _1MinResetTradesCounter = 0;
-                                        min1InTrade = true;
-                                        _1MinBreak = TrenchSettings.Min1.TrenchWidth;
+                                        if (PartitionChart[PartitionChart.Count - 1].Low > Min1Scan.OpenPrice)
+                                        {
+                                            min1Trades.Clear();
+                                            min1Trades.Add(Min1Scan);
+                                            _1MinResetTradesCounter = 0;
+                                            min1InTrade = true;
+                                            _1MinBreak = TrenchSettings.Min1.TrenchWidth;
+                                        }
                                     }
                                 }
                                 else
@@ -233,6 +235,8 @@ namespace Backtest
                             Results.Min1.AddTrade(trade);
                             min1Trades.Clear();
                             min1InTrade = false;
+                            lastTrade = trade;
+                            UpdateResultsGUI(1);
                             break;
                         }
                         else if (PartitionChart[PartitionChart.Count - 1].Low < trade.StopLoss) //trade lost
@@ -243,6 +247,8 @@ namespace Backtest
                             Results.Min1.AddTrade(trade);
                             min1Trades.Clear();
                             min1InTrade = false;
+                            lastTrade = trade;
+                            UpdateResultsGUI(1);
                             break;
                         }
                         else if (PartitionChart[PartitionChart.Count - 1].High > trade.TakeProfit && PartitionChart[PartitionChart.Count - 1].Low < trade.StopLoss) //need to do an extra scan on the 1 min for this day to determine if the trade was a win/loss, for now just set as loss
@@ -253,6 +259,8 @@ namespace Backtest
                             Results.Min1.AddTrade(trade);
                             min1Trades.Clear();
                             min1InTrade = false;
+                            lastTrade = trade;
+                            UpdateResultsGUI(1);
                             break;
                         }
                     }
@@ -269,8 +277,15 @@ namespace Backtest
                 _1MinResetTradesCounter++;
                 if (_1MinResetTradesCounter >= 100)
                 {
-                    min1Trades.Clear();
-                    min1InTrade = false;
+                    if (min1Trades.Count > 0)
+                    {
+                        if (!min1Trades[0].TradeState.Filled)
+                        {
+                            min1Trades.Clear();
+                            min1InTrade = false;
+                            _1MinResetTradesCounter = 0;
+                        }
+                    }
                 }
 
                 _Plot.Plot.XAxis.DateTimeFormat(true);
@@ -432,6 +447,56 @@ namespace Backtest
             }
 
             SetTimerSpeeds();
+        }
+
+        private void UpdateResultsGUI(int timeframe)
+        {
+            Min1PNL.Text = Results.Min1.PNL.ToString();
+
+            switch (timeframe)
+            {
+                case 1:
+                    Min1PNL.Text = Math.Round(Results.Min1.PNL, 2).ToString();
+                    Min1Trades.Text = Results.Min1.Trades.Count().ToString();
+                    Min1Wins.Text = Results.Min1.Wins.ToString();
+                    Min1WinPer.Text = Math.Round(Results.Min1.PercentageWin, 2).ToString();
+                    Min1ROI.Text = Math.Round(Results.Min1.ROI, 2).ToString();
+                    Min1DD.Text = Math.Round(Results.Min1.DD, 2).ToString();
+                    Min1MaxDD.Text = Math.Round(Results.Min1.MaxDD, 2).ToString();
+                    Min1AvgDD.Text = Math.Round(Results.Min1.AvgDD, 2).ToString();
+                    UpdateResultsGUI(9999999);
+                    break;
+                case 15:
+
+                    break;
+                case 60:
+
+                    break;
+                case 4:
+
+                    break;
+                case 12:
+
+                    break;
+                case 24:
+
+                    break;
+                case 3:
+
+                    break;
+                case 9999999:
+                    AllPNL.Text = Math.Round(Results.All.PNL, 2).ToString();
+                    AllTrades.Text = Results.All.Trades.Count().ToString();
+                    AllWins.Text = Results.All.Wins.ToString();
+                    AllWinPer.Text = Math.Round(Results.All.PercentageWin, 2).ToString();
+                    AllROI.Text = Math.Round(Results.All.ROI, 2).ToString();
+                    AllDD.Text = Math.Round(Results.All.DD, 2).ToString();
+                    AllMaxDD.Text = Math.Round(Results.All.MaxDD, 2).ToString();
+                    AllAvgDD.Text = Math.Round(Results.All.AvgDD, 2).ToString();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
