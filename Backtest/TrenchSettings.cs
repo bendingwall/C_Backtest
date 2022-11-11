@@ -32,7 +32,7 @@ namespace Backtest
         private int dumpWidth = 15;
         private int pumpWidth = 30;
         private int buffer = 205;
-        private double trenchDumpValue = -0.5;
+        private double trenchDumpValue = -3;
         private double trenchPumpValue;
         private bool trenchPumpClosedAboveDump;
 
@@ -60,12 +60,12 @@ namespace Backtest
             bool dumpValueAccepted = false;
             bool pumpValueAccepted = false;
 
-            List<OHLC> dump = new List<OHLC>();
+            List<List<OHLC>> dumps = new List<List<OHLC>>();
             List<OHLC> pump = new List<OHLC>();
 
             for (int i = 0; i < candles.Count; i++) //head is always going to be i
             {
-                dump = new List<OHLC>();
+                dumps = new List<List<OHLC>>();
                 pump = new List<OHLC>();
                 double trenchTail = 0;
                 double trenchHead = 0;
@@ -77,14 +77,17 @@ namespace Backtest
                 double pumpHighestOpen = 0, pumpHighestHigh = 0, pumpLowestLow = 99999999999, pumpLowestClose = 99999999999;
                 int pumpHighestOpenIndex = 0, pumpHighestHighIndex = 0, pumpLowestLowIndex = 0, pumpLowestCloseIndex = 0;
 
-                List<double> dumpLineChart = new List<double>();
+                List<List<double>> dumpLineChart = new List<List<double>>();
                 List<double> pumpLineChart = new List<double>();
 
-                if (candles.Count > TrenchSettings.Min1.DumpWidth + TrenchSettings.Min1.PumpWidth)
+                for (int j = TrenchSettings.Min1.DumpWidth; j > 0; j--)
                 {
-                    for (int j = 0; j < TrenchSettings.Min1.DumpWidth; j++)
+                    List<double> TMP_dumpLineChart = new List<double>();
+                    List<OHLC> TMP_dumps = new List<OHLC>();
+
+                    for (int k = 0; k < j; k++)
                     {
-                        int key = i + j;
+                        int key = i + k;
 
                         if (key < candles.Count - 1) //if we're not at the latest candle
                         {
@@ -110,32 +113,36 @@ namespace Backtest
                             }
 
                             double line = (candles[key].Open + candles[key].High + candles[key].Low + candles[key].Close) / 4;
-                            dump.Add(candles[key]);
-                            dumpLineChart.Add(line);
+                            TMP_dumps.Add(candles[key]);
+                            TMP_dumpLineChart.Add(line);
                         }
                         else
                         {
                             break;
                         }
                     }
-
+                    dumps.Add(TMP_dumps);
+                    dumpLineChart.Add(TMP_dumpLineChart);
+                }
+                for (int j = 0; j < dumps.Count; j++) //loop over all dump amounts
+                {
                     if (dumpLowestCloseIndex > dumpHighestOpenIndex) //first basic check to see if we're downtrending
                     {
                         double firstHalf = 0;
                         double secondHalf = 0;
 
 
-                        for (int j = 0; j < dumpLineChart.Count / 2; j++)
+                        for (int k = 0; k < dumpLineChart[j].Count / 2; k++)
                         {
-                            firstHalf += dumpLineChart[j];
+                            firstHalf += dumpLineChart[j][k];
                         }
-                        firstHalf = firstHalf / (dumpLineChart.Count / 2);
+                        firstHalf = firstHalf / (dumpLineChart[j].Count / 2);
 
-                        for (int j = dumpLineChart.Count - 1; j > dumpLineChart.Count / 2; j--)
+                        for (int k = dumpLineChart[j].Count - 1; k > dumpLineChart[j].Count / 2; k--)
                         {
-                            secondHalf += dumpLineChart[j];
+                            secondHalf += dumpLineChart[j][k];
                         }
-                        secondHalf = secondHalf / (dumpLineChart.Count / 2);
+                        secondHalf = secondHalf / (dumpLineChart[j].Count / 2);
 
 
                         if (firstHalf > secondHalf) //check to see if the average of the first half is more than the average of the second half - more advanced downtrend check
@@ -144,7 +151,7 @@ namespace Backtest
 
                             if (change <= TrenchSettings.Min1.TrenchDumpValue)
                             {
-                                foreach (var c in dump)
+                                foreach (var c in dumps[j])
                                 {
                                     if (c.Open > trenchTail)
                                     {
@@ -152,9 +159,9 @@ namespace Backtest
                                     }
                                 }
 
-                                for (int j = 0; j < TrenchSettings.Min1.PumpWidth; j++)
+                                for (int k = 0; k < TrenchSettings.Min1.PumpWidth; k++)
                                 {
-                                    int key = i + dump.Count + j;
+                                    int key = i + dumps[j].Count + k;
 
                                     if (key < candles.Count) //if we're not at the latest candle
                                     {
@@ -199,7 +206,7 @@ namespace Backtest
 
                                 if (trenchHead > trenchTail) //if the trench closed above the dump
                                 {
-                                    var trench = dump.Concat(pump);
+                                    var trench = dumps[j].Concat(pump);
                                     DateTime dt = new DateTime();
                                     dt = pump[pump.Count - 1].DateTime;
                                     foreach (var c in trench)
@@ -213,7 +220,7 @@ namespace Backtest
                                         }
                                     }
 
-                                    var combined = dump.Concat(pump).ToList();
+                                    var combined = dumps[j].Concat(pump).ToList();
 
                                     Trade t = new Trade(trenchBottom, dt, combined);
                                     return t;

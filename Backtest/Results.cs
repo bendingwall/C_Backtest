@@ -190,7 +190,7 @@ namespace Backtest
         public void Calculate()
         {
             double tmpPNL = 0;
-            double highestPNL = User.StartingBankroll;
+            double highestPNL = 0;
             double currentDD = 0;
             double maxDD = 0;
             double lowestLastDD = 0;
@@ -209,7 +209,7 @@ namespace Backtest
                 else
                 {
                     var lossPercentage = ((trade.StopLoss - trade.OpenPrice) / trade.OpenPrice);
-                    tmpPNL -= (trade.Amount * lossPercentage);
+                    tmpPNL -= (trade.Amount * -lossPercentage);
                     inDD = true;
                 }
 
@@ -253,11 +253,11 @@ namespace Backtest
             }
             double avgDD = dds / allDDs.Count();
 
-            double pw = wins / trades.Count * 100;
+            double pw = (double)wins / trades.Count() * 100;
             PercentageWin = Math.Round(pw, 2);
             PNL = Math.Round(tmpPNL, 2);
-            User.Bankroll += PNL;
-            ROI = User.Bankroll / User.StartingBankroll * 100 - 100;
+            User.Bankroll = User.StartingBankroll + PNL;
+            ROI = Math.Round(User.Bankroll / User.StartingBankroll * 100 - 100, 2);
             DD = currentDD;
             MaxDD = maxDD;
             AvgDD = avgDD;

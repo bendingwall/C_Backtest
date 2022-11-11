@@ -159,28 +159,39 @@ namespace Backtest
                     case 1:
                         if (_Position + TrenchSettings.Min1.TrenchWidth <= candles.Length)
                         {
-                            var Min1Scan = Trench.ScanForTrench(PartitionChart, 1);
-
-                            if (Min1Scan != null)
+                            if (PartitionChart.Count >= TrenchSettings.Min1.TrenchWidth)
                             {
-                                if (_1MinBreak <= 0)
+                                List<OHLC> tmpParChart = new List<OHLC>();
+                                for (int i = 0; i < TrenchSettings.Min1.TrenchWidth; i++)
                                 {
-                                    if (!min1InTrade && lastTrade.OpenPrice != Min1Scan.OpenPrice)
+                                    tmpParChart.Add(PartitionChart[PartitionChart.Count - i - 1]);
+                                }
+                                tmpParChart.Reverse();
+
+                                var Min1Scan = Trench.ScanForTrench(tmpParChart, 1);
+
+                                if (Min1Scan != null)
+                                {
+                                    if (_1MinBreak <= 0)
                                     {
-                                        if (PartitionChart[PartitionChart.Count - 1].Low > Min1Scan.OpenPrice)
+                                        if (!min1InTrade && lastTrade.OpenPrice != Min1Scan.OpenPrice)
                                         {
-                                            min1Trades.Clear();
-                                            min1Trades.Add(Min1Scan);
-                                            _1MinResetTradesCounter = 0;
-                                            min1InTrade = true;
-                                            _1MinBreak = TrenchSettings.Min1.TrenchWidth;
+                                            if (PartitionChart[PartitionChart.Count - 1].Low > Min1Scan.OpenPrice)
+                                            {
+                                                min1Trades.Clear();
+                                                min1Trades.Add(Min1Scan);
+                                                _1MinResetTradesCounter = 0;
+                                                min1InTrade = true;
+                                                _1MinBreak = TrenchSettings.Min1.TrenchWidth;
+                                            }
                                         }
                                     }
+                                    else
+                                    {
+                                        _1MinBreak--;
+                                    }
                                 }
-                                else
-                                {
-                                    _1MinBreak--;
-                                }
+
                             }
                         }
                         break;
@@ -275,7 +286,7 @@ namespace Backtest
                 }
 
                 _1MinResetTradesCounter++;
-                if (_1MinResetTradesCounter >= 100)
+                if (_1MinResetTradesCounter >= TrenchSettings.Min1.TrenchWidth)
                 {
                     if (min1Trades.Count > 0)
                     {
@@ -459,8 +470,8 @@ namespace Backtest
                     Min1PNL.Text = Math.Round(Results.Min1.PNL, 2).ToString();
                     Min1Trades.Text = Results.Min1.Trades.Count().ToString();
                     Min1Wins.Text = Results.Min1.Wins.ToString();
-                    Min1WinPer.Text = Math.Round(Results.Min1.PercentageWin, 2).ToString();
-                    Min1ROI.Text = Math.Round(Results.Min1.ROI, 2).ToString();
+                    Min1WinPer.Text = Math.Round(Results.Min1.PercentageWin, 2).ToString() + "%";
+                    Min1ROI.Text = Math.Round(Results.Min1.ROI, 2).ToString() + "%";
                     Min1DD.Text = Math.Round(Results.Min1.DD, 2).ToString();
                     Min1MaxDD.Text = Math.Round(Results.Min1.MaxDD, 2).ToString();
                     Min1AvgDD.Text = Math.Round(Results.Min1.AvgDD, 2).ToString();
@@ -488,8 +499,8 @@ namespace Backtest
                     AllPNL.Text = Math.Round(Results.All.PNL, 2).ToString();
                     AllTrades.Text = Results.All.Trades.Count().ToString();
                     AllWins.Text = Results.All.Wins.ToString();
-                    AllWinPer.Text = Math.Round(Results.All.PercentageWin, 2).ToString();
-                    AllROI.Text = Math.Round(Results.All.ROI, 2).ToString();
+                    AllWinPer.Text = Math.Round(Results.All.PercentageWin, 2).ToString() + "%";
+                    AllROI.Text = Math.Round(Results.All.ROI, 2).ToString() + "%";
                     AllDD.Text = Math.Round(Results.All.DD, 2).ToString();
                     AllMaxDD.Text = Math.Round(Results.All.MaxDD, 2).ToString();
                     AllAvgDD.Text = Math.Round(Results.All.AvgDD, 2).ToString();
